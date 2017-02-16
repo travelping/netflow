@@ -59,10 +59,10 @@ process_element(Id, _Name, _DataType, Status, Codec)
        Status =:= "deprecated" ->
     Codec;
 
-process_element(Id, Name, DataType, _Status, {TypeCast, Encode}) ->
+process_element(Id, Name, DataType, _Status, {TypeCast, TypeInfo}) ->
     TC = gen_typecast(Id, Name, DataType),
-    Enc = gen_encode(Id, Name, DataType),
-    {[TC | TypeCast], [Enc | Encode]}.
+    TI = io_lib:format("type_info('~s') -> {~w, '~s'}", [Name, Id, DataType]),
+    {[TC | TypeCast], [TI | TypeInfo]}.
 
 gen_typecast_uint(Id, Name, Bytes) ->
     io_lib:format("typecast_field(Bin, ~w, Length)~n"
@@ -150,116 +150,23 @@ gen_typecast(Id, Name, DataType)
 gen_typecast(Id, Name, DataType) ->
     io_lib:format("~p ~p ~p", [Id, Name, DataType]).
 
-%% typecast_field(<<Value:64/integer>>, 323, 8) ->
-%%     {observationTime, Value};
-
-%% encode_field(observationTime, Value) ->
-%%     {<<Value:64/integer>>, 323, 8}.
-
-gen_encode_uint(Id, Name, Bytes) ->
-    io_lib:format("encode_field('~s', Value)~n"
-		  "  when is_integer(Value) andalso Value >= 0 ->~n"
-		  "    {<<Value:~w/unsigned-integer>>, ~w, ~w}",
-		  [Name, Bytes * 8, Id, Bytes]).
-
-gen_encode_int(Id, Name, Bytes) ->
-    io_lib:format("encode_field('~s', Value)~n"
-		  "  when is_integer(Value) ->~n"
-		  "    {<<Value:~w/signed-integer>>, ~w, ~w}",
-		  [Name, Bytes * 8, Id, Bytes]).
-
-gen_encode_float(Id, Name, Bytes) ->
-    io_lib:format("encode_field('~s', Value)~n"
-		  "  when is_number(Value) ->~n"
-		  "    {<<Value:~w/float>>, ~w, ~w}",
-		  [Name, Bytes * 8, Id, Bytes]).
-
-gen_encode(Id, Name, boolean) ->
-    io_lib:format("encode_field('~s', Value)~n"
-		  " when is_boolean(Value) ->~n"
-		  "    {bool2bin(Value), ~w, 1}",
-		  [Name, Id]);
-gen_encode(Id, Name, unsigned8) ->
-    gen_encode_uint(Id, Name, 1);
-gen_encode(Id, Name, unsigned16) ->
-    gen_encode_uint(Id, Name, 2);
-gen_encode(Id, Name, unsigned32) ->
-    gen_encode_uint(Id, Name, 4);
-gen_encode(Id, Name, unsigned64) ->
-    gen_encode_uint(Id, Name, 8);
-gen_encode(Id, Name, signed8) ->
-    gen_encode_int(Id, Name, 1);
-gen_encode(Id, Name, signed16) ->
-    gen_encode_int(Id, Name, 2);
-gen_encode(Id, Name, signed32) ->
-    gen_encode_int(Id, Name, 4);
-gen_encode(Id, Name, signed64) ->
-    gen_encode_int(Id, Name, 8);
-gen_encode(Id, Name, float32) ->
-    gen_encode_float(Id, Name, 4);
-gen_encode(Id, Name, float64) ->
-    gen_encode_float(Id, Name, 8);
-gen_encode(Id, Name, ipv4Address) ->
-    io_lib:format("encode_field('~s', {A, B, C, D}) ->~n"
-		  "    {<<A, B, C, D>>, ~w, 4}",
-		  [Name, Id]);
-gen_encode(Id, Name, ipv6Address) ->
-    io_lib:format("encode_field('~s', {A, B, C, D, E, F, G, H}) ->~n"
-		  "    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, ~w, 16}",
-		  [Name, Id]);
-gen_encode(Id, Name, macAddress) ->
-    io_lib:format("encode_field('~s', Value)~n"
-		  "  when is_binary(Value) andalso byte_size(Value) =:= 6 ->~n"
-		  "    {Value, ~w, 6}",
-		  [Name, Id]);
-gen_encode(Id, Name, DataType)
-  when DataType == string; DataType == octetArray ->
-    io_lib:format("encode_field('~s', Value)~n"
-		  "  when is_binary(Value) ->~n"
-		  "    {encode_variable_field(Value), ~w, 65535}",
-		  [Name, Id]);
-gen_encode(Id, Name, dateTimeSeconds) ->
-    gen_encode_uint(Id, Name, 4);
-gen_encode(Id, Name, dateTimeMilliseconds) ->
-    gen_encode_uint(Id, Name, 8);
-gen_encode(Id, Name, DataType)
-  when DataType == dateTimeMicroseconds; DataType == dateTimeNanoseconds ->
-    io_lib:format("encode_field('~s', {Seconds, Fraction})~n"
-		  "  when is_integer(Seconds) andalso is_integer(Fraction) ->~n"
-		  "    {<<Seconds:32, Fraction:32>>, ~w, 8}",
-		  [Name, Id]);
-
-gen_encode(Id, Name, DataType)
-  when DataType == basicList;
-       DataType == subTemplateList;
-       DataType == subTemplateMultiList ->
-    io_lib:format("%% ~p ~p ~p", [Id, Name, DataType]);
-
-gen_encode(Id, Name, DataType) ->
-    io_lib:format("~p ~p ~p", [Id, Name, DataType]).
-
-fmt_fun(Fun) ->
-    io_lib:format("~s.~n~n", [lists:join(";\n\n", lists:reverse(Fun))]).
-
 main(_) ->
     {ok, File} = file:open("priv/ipfix-information-elements.csv", [read]),
     {_, Codec} = read_line(File, {csv_init(), codec_init()}),
-    {TypeSpec0, Encode0} = Codec,
+    {TypeSpec0, TypeInfo0} = Codec,
 
     TypeSpec = ["typecast_field(Value, Id, _Length) ->\n"
 		"    {Id, Value}"
 		| TypeSpec0],
-    Encode = [
-	      "encode_field(Id, Value) ->\n"
-	      "    erlang:error(badarg, [Id, Value])",
-	      "encode_field(Id, Value)\n"
-	      "  when is_integer(Id) andalso is_binary(Value) ->\n"
-	      "    {Value, Id, byte_size(Value)}"
-	      | Encode0],
+    TypeInfo = [
+	      "type_info(Id) ->\n"
+	      "    erlang:error(badarg, [Id])"
+	      | TypeInfo0],
 
     D = ["%%\n%% This file is auto-generated. DO NOT EDIT\n%%",
 	 "\n\n%% ============================\n\n",
-	 fmt_fun(TypeSpec),
+	 lists:join(";\n\n", lists:reverse(TypeSpec)), ".\n\n",
 	 "\n\n%% ============================\n\n",
-	 fmt_fun(Encode)],
+	 lists:join(";\n", lists:reverse(TypeInfo)), ".\n"
+	],
     file:write_file("src/ipfix_v10_codec_gen.hrl", D).

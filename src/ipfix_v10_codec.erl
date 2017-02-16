@@ -62,14 +62,14 @@ encode(ExportTime, FlowSeq, DomainId, TemplateId, Records) ->
 %%%===================================================================
 
 encode_fields(Fields) ->
-    Encoded = [Data || {Data, _, _} <- [encode_field(F, V) || {F, V} <- Fields]],
-    list_to_binary(Encoded).
+    << << (encode_field(F, V))/binary >> || {F, V} <- Fields >>.
 
 encode_template_fields([], Acc) ->
     list_to_binary(lists:reverse(Acc));
-encode_template_fields([{Field, Value} | Rest], Acc) ->
-    {_Data, Type, Length} = encode_field(Field, Value),
-    encode_template_fields(Rest, [<<Type:16, Length:16>> | Acc]).
+encode_template_fields([{Field, _Value} | Rest], Acc) ->
+    {Id, DataType} = type_info(Field),
+    Length = type_size(DataType),
+    encode_template_fields(Rest, [<<Id:16, Length:16>> | Acc]).
 
 decode_packet(<<Version:16, Length:16, ExportTime:32, SequenceNum:32, DomainId:32, Data/binary>>, IP) ->
     BinLen = Length - 16,
@@ -208,8 +208,103 @@ encode_variable_field(Value) ->
 
 bin2bool(<<1>>) -> true;
 bin2bool(<<2>>) -> false.
-bool2bin(true)  -> <<1>>;
-bool2bin(false) -> <<2>>.
+
+%%%===================================================================
+
+type_size(boolean)              -> 1;
+type_size(unsigned8)            -> 1;
+type_size(unsigned16)           -> 2;
+type_size(unsigned32)           -> 4;
+type_size(unsigned64)           -> 8;
+type_size(signed8)              -> 1;
+type_size(signed16)             -> 2;
+type_size(signed32)             -> 4;
+type_size(signed64)             -> 8;
+type_size(float32)              -> 4;
+type_size(float64)              -> 8;
+type_size(string)               -> 65535;
+type_size(octetArray)           -> 65535;
+type_size(ipv4Address)          -> 4;
+type_size(ipv6Address)          -> 16;
+type_size(macAddress)           -> 6;
+type_size(dateTimeSeconds)      -> 4;
+type_size(dateTimeMilliseconds) -> 8;
+type_size(dateTimeMicroseconds) -> 8;
+type_size(dateTimeNanoseconds)  -> 8.
+
+encode_field_value(boolean, true) ->
+    <<1>>;
+encode_field_value(boolean, false) ->
+    <<2>>;
+encode_field_value(unsigned8, Value)
+  when is_integer(Value) andalso Value >= 0 ->
+    <<Value:8/unsigned-integer>>;
+encode_field_value(unsigned16, Value)
+  when is_integer(Value) andalso Value >= 0 ->
+    <<Value:16/unsigned-integer>>;
+encode_field_value(unsigned32, Value)
+  when is_integer(Value) andalso Value >= 0 ->
+    <<Value:32/unsigned-integer>>;
+encode_field_value(unsigned64, Value)
+  when is_integer(Value) andalso Value >= 0 ->
+    <<Value:64/unsigned-integer>>;
+encode_field_value(signed8, Value)
+  when is_integer(Value) ->
+    <<Value:8/signed-integer>>;
+encode_field_value(signed16, Value)
+  when is_integer(Value) ->
+    <<Value:16/signed-integer>>;
+encode_field_value(signed32, Value)
+  when is_integer(Value) ->
+    <<Value:32/signed-integer>>;
+encode_field_value(signed64, Value)
+  when is_integer(Value) ->
+    <<Value:64/signed-integer>>;
+encode_field_value(float32, Value)
+  when is_number(Value) ->
+    <<Value:32/float>>;
+encode_field_value(float64, Value)
+  when is_number(Value) ->
+    <<Value:64/float>>;
+encode_field_value(string, Value)
+  when is_list(Value) ->
+    encode_variable_field(iolist_to_binary(Value));
+encode_field_value(Type, Value)
+  when (Type == string orelse Type == octetArray) andalso is_binary(Value) ->
+    encode_variable_field(Value);
+encode_field_value(ipv4Address, {A, B, C, D}) ->
+    <<A, B, C, D>>;
+encode_field_value(ipv4Address, Value)
+  when is_binary(Value) andalso byte_size(Value) == 4 ->
+    Value;
+encode_field_value(ipv6Address, {A, B, C, D, E, F, G, H}) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>;
+encode_field_value(ipv6Address, Value)
+  when is_binary(Value) andalso byte_size(Value) == 16 ->
+    Value;
+encode_field_value(macAddress, Value)
+  when is_binary(Value) andalso byte_size(Value) == 6 ->
+    Value;
+encode_field_value(dateTimeSeconds, Value)
+  when is_integer(Value) andalso Value >= 0 ->
+    <<Value:32/unsigned-integer>>;
+encode_field_value(dateTimeMilliseconds, Value)
+  when is_integer(Value) andalso Value >= 0 ->
+    <<Value:64/unsigned-integer>>;
+encode_field_value(dateTimeMicroseconds, {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
+    <<Seconds:32, Fraction:32>>;
+encode_field_value(dateTimeNanoseconds, {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
+    <<Seconds:32, Fraction:32>>;
+encode_field_value(Type, Value) ->
+    erlang:error(badarg, [Type, Value]).
+
+encode_field(Id, Value) when is_atom(Id) ->
+    {_Code, Type} = type_info(Id),
+    encode_field_value(Type, Value).
+
+%%%===================================================================
 
 -include("ipfix_v10_codec_gen.hrl").
 

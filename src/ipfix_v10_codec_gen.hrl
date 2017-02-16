@@ -1863,9 +1863,9 @@ typecast_field(Bin, 442, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'mibObjectValueUnsigned', Value};
 
-%% 443 "mibObjectValueTable" subTemplateList "current";
+%% 443 "mibObjectValueTable" subTemplateList;
 
-%% 444 "mibObjectValueRow" subTemplateList "current";
+%% 444 "mibObjectValueRow" subTemplateList;
 
 typecast_field(Value, 445, Length)
   when byte_size(Value) == Length ->
@@ -1951,1637 +1951,421 @@ typecast_field(Value, Id, _Length) ->
 
 %% ============================
 
-encode_field('octetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 1, 8};
-
-encode_field('packetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 2, 8};
-
-encode_field('deltaFlowCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 3, 8};
-
-encode_field('protocolIdentifier', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 4, 1};
-
-encode_field('ipClassOfService', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 5, 1};
-
-encode_field('tcpControlBits', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 6, 2};
-
-encode_field('sourceTransportPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 7, 2};
-
-encode_field('sourceIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 8, 4};
-
-encode_field('sourceIPv4PrefixLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 9, 1};
-
-encode_field('ingressInterface', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 10, 4};
-
-encode_field('destinationTransportPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 11, 2};
-
-encode_field('destinationIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 12, 4};
-
-encode_field('destinationIPv4PrefixLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 13, 1};
-
-encode_field('egressInterface', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 14, 4};
-
-encode_field('ipNextHopIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 15, 4};
-
-encode_field('bgpSourceAsNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 16, 4};
-
-encode_field('bgpDestinationAsNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 17, 4};
-
-encode_field('bgpNextHopIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 18, 4};
-
-encode_field('postMCastPacketDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 19, 8};
-
-encode_field('postMCastOctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 20, 8};
-
-encode_field('flowEndSysUpTime', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 21, 4};
-
-encode_field('flowStartSysUpTime', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 22, 4};
-
-encode_field('postOctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 23, 8};
-
-encode_field('postPacketDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 24, 8};
-
-encode_field('minimumIpTotalLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 25, 8};
-
-encode_field('maximumIpTotalLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 26, 8};
-
-encode_field('sourceIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 27, 16};
-
-encode_field('destinationIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 28, 16};
-
-encode_field('sourceIPv6PrefixLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 29, 1};
-
-encode_field('destinationIPv6PrefixLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 30, 1};
-
-encode_field('flowLabelIPv6', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 31, 4};
-
-encode_field('icmpTypeCodeIPv4', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 32, 2};
-
-encode_field('igmpType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 33, 1};
-
-encode_field('flowActiveTimeout', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 36, 2};
-
-encode_field('flowIdleTimeout', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 37, 2};
-
-encode_field('exportedOctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 40, 8};
-
-encode_field('exportedMessageTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 41, 8};
-
-encode_field('exportedFlowRecordTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 42, 8};
-
-encode_field('sourceIPv4Prefix', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 44, 4};
-
-encode_field('destinationIPv4Prefix', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 45, 4};
-
-encode_field('mplsTopLabelType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 46, 1};
-
-encode_field('mplsTopLabelIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 47, 4};
-
-encode_field('minimumTTL', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 52, 1};
-
-encode_field('maximumTTL', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 53, 1};
-
-encode_field('fragmentIdentification', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 54, 4};
-
-encode_field('postIpClassOfService', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 55, 1};
-
-encode_field('sourceMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 56, 6};
-
-encode_field('postDestinationMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 57, 6};
-
-encode_field('vlanId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 58, 2};
-
-encode_field('postVlanId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 59, 2};
-
-encode_field('ipVersion', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 60, 1};
-
-encode_field('flowDirection', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 61, 1};
-
-encode_field('ipNextHopIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 62, 16};
-
-encode_field('bgpNextHopIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 63, 16};
-
-encode_field('ipv6ExtensionHeaders', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 64, 4};
-
-encode_field('mplsTopLabelStackSection', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 70, 65535};
-
-encode_field('mplsLabelStackSection2', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 71, 65535};
-
-encode_field('mplsLabelStackSection3', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 72, 65535};
-
-encode_field('mplsLabelStackSection4', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 73, 65535};
-
-encode_field('mplsLabelStackSection5', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 74, 65535};
-
-encode_field('mplsLabelStackSection6', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 75, 65535};
-
-encode_field('mplsLabelStackSection7', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 76, 65535};
-
-encode_field('mplsLabelStackSection8', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 77, 65535};
-
-encode_field('mplsLabelStackSection9', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 78, 65535};
-
-encode_field('mplsLabelStackSection10', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 79, 65535};
-
-encode_field('destinationMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 80, 6};
-
-encode_field('postSourceMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 81, 6};
-
-encode_field('interfaceName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 82, 65535};
-
-encode_field('interfaceDescription', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 83, 65535};
-
-encode_field('octetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 85, 8};
-
-encode_field('packetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 86, 8};
-
-encode_field('fragmentOffset', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 88, 2};
-
-encode_field('forwardingStatus', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 89, 4};
-
-encode_field('mplsVpnRouteDistinguisher', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 90, 65535};
-
-encode_field('mplsTopLabelPrefixLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 91, 1};
-
-encode_field('srcTrafficIndex', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 92, 4};
-
-encode_field('dstTrafficIndex', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 93, 4};
-
-encode_field('applicationDescription', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 94, 65535};
-
-encode_field('applicationId', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 95, 65535};
-
-encode_field('applicationName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 96, 65535};
-
-encode_field('postIpDiffServCodePoint', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 98, 1};
-
-encode_field('multicastReplicationFactor', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 99, 4};
-
-encode_field('classificationEngineId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 101, 1};
-
-encode_field('bgpNextAdjacentAsNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 128, 4};
-
-encode_field('bgpPrevAdjacentAsNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 129, 4};
-
-encode_field('exporterIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 130, 4};
-
-encode_field('exporterIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 131, 16};
-
-encode_field('droppedOctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 132, 8};
-
-encode_field('droppedPacketDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 133, 8};
-
-encode_field('droppedOctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 134, 8};
-
-encode_field('droppedPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 135, 8};
-
-encode_field('flowEndReason', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 136, 1};
-
-encode_field('commonPropertiesId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 137, 8};
-
-encode_field('observationPointId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 138, 8};
-
-encode_field('icmpTypeCodeIPv6', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 139, 2};
-
-encode_field('mplsTopLabelIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 140, 16};
-
-encode_field('lineCardId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 141, 4};
-
-encode_field('portId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 142, 4};
-
-encode_field('meteringProcessId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 143, 4};
-
-encode_field('exportingProcessId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 144, 4};
-
-encode_field('templateId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 145, 2};
-
-encode_field('wlanChannelId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 146, 1};
-
-encode_field('wlanSSID', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 147, 65535};
-
-encode_field('flowId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 148, 8};
-
-encode_field('observationDomainId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 149, 4};
-
-encode_field('flowStartSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 150, 4};
-
-encode_field('flowEndSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 151, 4};
-
-encode_field('flowStartMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 152, 8};
-
-encode_field('flowEndMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 153, 8};
-
-encode_field('flowStartMicroseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 154, 8};
-
-encode_field('flowEndMicroseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 155, 8};
-
-encode_field('flowStartNanoseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 156, 8};
-
-encode_field('flowEndNanoseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 157, 8};
-
-encode_field('flowStartDeltaMicroseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 158, 4};
-
-encode_field('flowEndDeltaMicroseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 159, 4};
-
-encode_field('systemInitTimeMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 160, 8};
-
-encode_field('flowDurationMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 161, 4};
-
-encode_field('flowDurationMicroseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 162, 4};
-
-encode_field('observedFlowTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 163, 8};
-
-encode_field('ignoredPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 164, 8};
-
-encode_field('ignoredOctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 165, 8};
-
-encode_field('notSentFlowTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 166, 8};
-
-encode_field('notSentPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 167, 8};
-
-encode_field('notSentOctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 168, 8};
-
-encode_field('destinationIPv6Prefix', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 169, 16};
-
-encode_field('sourceIPv6Prefix', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 170, 16};
-
-encode_field('postOctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 171, 8};
-
-encode_field('postPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 172, 8};
-
-encode_field('flowKeyIndicator', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 173, 8};
-
-encode_field('postMCastPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 174, 8};
-
-encode_field('postMCastOctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 175, 8};
-
-encode_field('icmpTypeIPv4', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 176, 1};
-
-encode_field('icmpCodeIPv4', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 177, 1};
-
-encode_field('icmpTypeIPv6', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 178, 1};
-
-encode_field('icmpCodeIPv6', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 179, 1};
-
-encode_field('udpSourcePort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 180, 2};
-
-encode_field('udpDestinationPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 181, 2};
-
-encode_field('tcpSourcePort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 182, 2};
-
-encode_field('tcpDestinationPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 183, 2};
-
-encode_field('tcpSequenceNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 184, 4};
-
-encode_field('tcpAcknowledgementNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 185, 4};
-
-encode_field('tcpWindowSize', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 186, 2};
-
-encode_field('tcpUrgentPointer', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 187, 2};
-
-encode_field('tcpHeaderLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 188, 1};
-
-encode_field('ipHeaderLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 189, 1};
-
-encode_field('totalLengthIPv4', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 190, 2};
-
-encode_field('payloadLengthIPv6', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 191, 2};
-
-encode_field('ipTTL', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 192, 1};
-
-encode_field('nextHeaderIPv6', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 193, 1};
-
-encode_field('mplsPayloadLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 194, 4};
-
-encode_field('ipDiffServCodePoint', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 195, 1};
-
-encode_field('ipPrecedence', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 196, 1};
-
-encode_field('fragmentFlags', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 197, 1};
-
-encode_field('octetDeltaSumOfSquares', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 198, 8};
-
-encode_field('octetTotalSumOfSquares', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 199, 8};
-
-encode_field('mplsTopLabelTTL', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 200, 1};
-
-encode_field('mplsLabelStackLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 201, 4};
-
-encode_field('mplsLabelStackDepth', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 202, 4};
-
-encode_field('mplsTopLabelExp', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 203, 1};
-
-encode_field('ipPayloadLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 204, 4};
-
-encode_field('udpMessageLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 205, 2};
-
-encode_field('isMulticast', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 206, 1};
-
-encode_field('ipv4IHL', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 207, 1};
-
-encode_field('ipv4Options', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 208, 4};
-
-encode_field('tcpOptions', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 209, 8};
-
-encode_field('paddingOctets', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 210, 65535};
-
-encode_field('collectorIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 211, 4};
-
-encode_field('collectorIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 212, 16};
-
-encode_field('exportInterface', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 213, 4};
-
-encode_field('exportProtocolVersion', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 214, 1};
-
-encode_field('exportTransportProtocol', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 215, 1};
-
-encode_field('collectorTransportPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 216, 2};
-
-encode_field('exporterTransportPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 217, 2};
-
-encode_field('tcpSynTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 218, 8};
-
-encode_field('tcpFinTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 219, 8};
-
-encode_field('tcpRstTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 220, 8};
-
-encode_field('tcpPshTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 221, 8};
-
-encode_field('tcpAckTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 222, 8};
-
-encode_field('tcpUrgTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 223, 8};
-
-encode_field('ipTotalLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 224, 8};
-
-encode_field('postNATSourceIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 225, 4};
-
-encode_field('postNATDestinationIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 226, 4};
-
-encode_field('postNAPTSourceTransportPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 227, 2};
-
-encode_field('postNAPTDestinationTransportPort', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 228, 2};
-
-encode_field('natOriginatingAddressRealm', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 229, 1};
-
-encode_field('natEvent', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 230, 1};
-
-encode_field('initiatorOctets', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 231, 8};
-
-encode_field('responderOctets', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 232, 8};
-
-encode_field('firewallEvent', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 233, 1};
-
-encode_field('ingressVRFID', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 234, 4};
-
-encode_field('egressVRFID', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 235, 4};
-
-encode_field('VRFname', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 236, 65535};
-
-encode_field('postMplsTopLabelExp', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 237, 1};
-
-encode_field('tcpWindowScale', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 238, 2};
-
-encode_field('biflowDirection', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 239, 1};
-
-encode_field('ethernetHeaderLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 240, 1};
-
-encode_field('ethernetPayloadLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 241, 2};
-
-encode_field('ethernetTotalLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 242, 2};
-
-encode_field('dot1qVlanId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 243, 2};
-
-encode_field('dot1qPriority', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 244, 1};
-
-encode_field('dot1qCustomerVlanId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 245, 2};
-
-encode_field('dot1qCustomerPriority', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 246, 1};
-
-encode_field('metroEvcId', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 247, 65535};
-
-encode_field('metroEvcType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 248, 1};
-
-encode_field('pseudoWireId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 249, 4};
-
-encode_field('pseudoWireType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 250, 2};
-
-encode_field('pseudoWireControlWord', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 251, 4};
-
-encode_field('ingressPhysicalInterface', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 252, 4};
-
-encode_field('egressPhysicalInterface', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 253, 4};
-
-encode_field('postDot1qVlanId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 254, 2};
-
-encode_field('postDot1qCustomerVlanId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 255, 2};
-
-encode_field('ethernetType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 256, 2};
-
-encode_field('postIpPrecedence', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 257, 1};
-
-encode_field('collectionTimeMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 258, 8};
-
-encode_field('exportSctpStreamId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 259, 2};
-
-encode_field('maxExportSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 260, 4};
-
-encode_field('maxFlowEndSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 261, 4};
-
-encode_field('messageMD5Checksum', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 262, 65535};
-
-encode_field('messageScope', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 263, 1};
-
-encode_field('minExportSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 264, 4};
-
-encode_field('minFlowStartSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 265, 4};
-
-encode_field('opaqueOctets', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 266, 65535};
-
-encode_field('sessionScope', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 267, 1};
-
-encode_field('maxFlowEndMicroseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 268, 8};
-
-encode_field('maxFlowEndMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 269, 8};
-
-encode_field('maxFlowEndNanoseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 270, 8};
-
-encode_field('minFlowStartMicroseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 271, 8};
-
-encode_field('minFlowStartMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 272, 8};
-
-encode_field('minFlowStartNanoseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 273, 8};
-
-encode_field('collectorCertificate', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 274, 65535};
-
-encode_field('exporterCertificate', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 275, 65535};
-
-encode_field('dataRecordsReliability', Value)
- when is_boolean(Value) ->
-    {bool2bin(Value), 276, 1};
-
-encode_field('observationPointType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 277, 1};
-
-encode_field('newConnectionDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 278, 4};
-
-encode_field('connectionSumDurationSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 279, 8};
-
-encode_field('connectionTransactionId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 280, 8};
-
-encode_field('postNATSourceIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 281, 16};
-
-encode_field('postNATDestinationIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 282, 16};
-
-encode_field('natPoolId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 283, 4};
-
-encode_field('natPoolName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 284, 65535};
-
-encode_field('anonymizationFlags', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 285, 2};
-
-encode_field('anonymizationTechnique', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 286, 2};
-
-encode_field('informationElementIndex', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 287, 2};
-
-encode_field('p2pTechnology', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 288, 65535};
-
-encode_field('tunnelTechnology', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 289, 65535};
-
-encode_field('encryptedTechnology', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 290, 65535};
-
-%% 291 "basicList" basicList "current";
-
-%% 292 "subTemplateList" subTemplateList "current";
-
-%% 293 "subTemplateMultiList" subTemplateMultiList "current";
-
-encode_field('bgpValidityState', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 294, 1};
-
-encode_field('IPSecSPI', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 295, 4};
-
-encode_field('greKey', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 296, 4};
-
-encode_field('natType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 297, 1};
-
-encode_field('initiatorPackets', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 298, 8};
-
-encode_field('responderPackets', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 299, 8};
-
-encode_field('observationDomainName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 300, 65535};
-
-encode_field('selectionSequenceId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 301, 8};
-
-encode_field('selectorId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 302, 8};
-
-encode_field('informationElementId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 303, 2};
-
-encode_field('selectorAlgorithm', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 304, 2};
-
-encode_field('samplingPacketInterval', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 305, 4};
-
-encode_field('samplingPacketSpace', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 306, 4};
-
-encode_field('samplingTimeInterval', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 307, 4};
-
-encode_field('samplingTimeSpace', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 308, 4};
-
-encode_field('samplingSize', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 309, 4};
-
-encode_field('samplingPopulation', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 310, 4};
-
-encode_field('samplingProbability', Value)
-  when is_number(Value) ->
-    {<<Value:64/float>>, 311, 8};
-
-encode_field('dataLinkFrameSize', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 312, 2};
-
-encode_field('ipHeaderPacketSection', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 313, 65535};
-
-encode_field('ipPayloadPacketSection', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 314, 65535};
-
-encode_field('dataLinkFrameSection', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 315, 65535};
-
-encode_field('mplsLabelStackSection', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 316, 65535};
-
-encode_field('mplsPayloadPacketSection', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 317, 65535};
-
-encode_field('selectorIdTotalPktsObserved', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 318, 8};
-
-encode_field('selectorIdTotalPktsSelected', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 319, 8};
-
-encode_field('absoluteError', Value)
-  when is_number(Value) ->
-    {<<Value:64/float>>, 320, 8};
-
-encode_field('relativeError', Value)
-  when is_number(Value) ->
-    {<<Value:64/float>>, 321, 8};
-
-encode_field('observationTimeSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 322, 4};
-
-encode_field('observationTimeMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 323, 8};
-
-encode_field('observationTimeMicroseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 324, 8};
-
-encode_field('observationTimeNanoseconds', {Seconds, Fraction})
-  when is_integer(Seconds) andalso is_integer(Fraction) ->
-    {<<Seconds:32, Fraction:32>>, 325, 8};
-
-encode_field('digestHashValue', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 326, 8};
-
-encode_field('hashIPPayloadOffset', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 327, 8};
-
-encode_field('hashIPPayloadSize', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 328, 8};
-
-encode_field('hashOutputRangeMin', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 329, 8};
-
-encode_field('hashOutputRangeMax', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 330, 8};
-
-encode_field('hashSelectedRangeMin', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 331, 8};
-
-encode_field('hashSelectedRangeMax', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 332, 8};
-
-encode_field('hashDigestOutput', Value)
- when is_boolean(Value) ->
-    {bool2bin(Value), 333, 1};
-
-encode_field('hashInitialiserValue', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 334, 8};
-
-encode_field('selectorName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 335, 65535};
-
-encode_field('upperCILimit', Value)
-  when is_number(Value) ->
-    {<<Value:64/float>>, 336, 8};
-
-encode_field('lowerCILimit', Value)
-  when is_number(Value) ->
-    {<<Value:64/float>>, 337, 8};
-
-encode_field('confidenceLevel', Value)
-  when is_number(Value) ->
-    {<<Value:64/float>>, 338, 8};
-
-encode_field('informationElementDataType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 339, 1};
-
-encode_field('informationElementDescription', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 340, 65535};
-
-encode_field('informationElementName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 341, 65535};
-
-encode_field('informationElementRangeBegin', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 342, 8};
-
-encode_field('informationElementRangeEnd', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 343, 8};
-
-encode_field('informationElementSemantics', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 344, 1};
-
-encode_field('informationElementUnits', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 345, 2};
-
-encode_field('privateEnterpriseNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 346, 4};
-
-encode_field('virtualStationInterfaceId', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 347, 65535};
-
-encode_field('virtualStationInterfaceName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 348, 65535};
-
-encode_field('virtualStationUUID', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 349, 65535};
-
-encode_field('virtualStationName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 350, 65535};
-
-encode_field('layer2SegmentId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 351, 8};
-
-encode_field('layer2OctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 352, 8};
-
-encode_field('layer2OctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 353, 8};
-
-encode_field('ingressUnicastPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 354, 8};
-
-encode_field('ingressMulticastPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 355, 8};
-
-encode_field('ingressBroadcastPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 356, 8};
-
-encode_field('egressUnicastPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 357, 8};
-
-encode_field('egressBroadcastPacketTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 358, 8};
-
-encode_field('monitoringIntervalStartMilliSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 359, 8};
-
-encode_field('monitoringIntervalEndMilliSeconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 360, 8};
-
-encode_field('portRangeStart', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 361, 2};
-
-encode_field('portRangeEnd', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 362, 2};
-
-encode_field('portRangeStepSize', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 363, 2};
-
-encode_field('portRangeNumPorts', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 364, 2};
-
-encode_field('staMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 365, 6};
-
-encode_field('staIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 366, 4};
-
-encode_field('wtpMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 367, 6};
-
-encode_field('ingressInterfaceType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 368, 4};
-
-encode_field('egressInterfaceType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 369, 4};
-
-encode_field('rtpSequenceNumber', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 370, 2};
-
-encode_field('userName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 371, 65535};
-
-encode_field('applicationCategoryName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 372, 65535};
-
-encode_field('applicationSubCategoryName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 373, 65535};
-
-encode_field('applicationGroupName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 374, 65535};
-
-encode_field('originalFlowsPresent', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 375, 8};
-
-encode_field('originalFlowsInitiated', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 376, 8};
-
-encode_field('originalFlowsCompleted', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 377, 8};
-
-encode_field('distinctCountOfSourceIPAddress', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 378, 8};
-
-encode_field('distinctCountOfDestinationIPAddress', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 379, 8};
-
-encode_field('distinctCountOfSourceIPv4Address', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 380, 4};
-
-encode_field('distinctCountOfDestinationIPv4Address', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 381, 4};
-
-encode_field('distinctCountOfSourceIPv6Address', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 382, 8};
-
-encode_field('distinctCountOfDestinationIPv6Address', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 383, 8};
-
-encode_field('valueDistributionMethod', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 384, 1};
-
-encode_field('rfc3550JitterMilliseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 385, 4};
-
-encode_field('rfc3550JitterMicroseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 386, 4};
-
-encode_field('rfc3550JitterNanoseconds', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 387, 4};
-
-encode_field('dot1qDEI', Value)
- when is_boolean(Value) ->
-    {bool2bin(Value), 388, 1};
-
-encode_field('dot1qCustomerDEI', Value)
- when is_boolean(Value) ->
-    {bool2bin(Value), 389, 1};
-
-encode_field('flowSelectorAlgorithm', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 390, 2};
-
-encode_field('flowSelectedOctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 391, 8};
-
-encode_field('flowSelectedPacketDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 392, 8};
-
-encode_field('flowSelectedFlowDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 393, 8};
-
-encode_field('selectorIDTotalFlowsObserved', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 394, 8};
-
-encode_field('selectorIDTotalFlowsSelected', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 395, 8};
-
-encode_field('samplingFlowInterval', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 396, 8};
-
-encode_field('samplingFlowSpacing', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 397, 8};
-
-encode_field('flowSamplingTimeInterval', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 398, 8};
-
-encode_field('flowSamplingTimeSpacing', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 399, 8};
-
-encode_field('hashFlowDomain', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 400, 2};
-
-encode_field('transportOctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 401, 8};
-
-encode_field('transportPacketDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 402, 8};
-
-encode_field('originalExporterIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 403, 4};
-
-encode_field('originalExporterIPv6Address', {A, B, C, D, E, F, G, H}) ->
-    {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 404, 16};
-
-encode_field('originalObservationDomainId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 405, 4};
-
-encode_field('intermediateProcessId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 406, 4};
-
-encode_field('ignoredDataRecordTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 407, 8};
-
-encode_field('dataLinkFrameType', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 408, 2};
-
-encode_field('sectionOffset', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 409, 2};
-
-encode_field('sectionExportedOctets', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 410, 2};
-
-encode_field('dot1qServiceInstanceTag', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 411, 65535};
-
-encode_field('dot1qServiceInstanceId', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 412, 4};
-
-encode_field('dot1qServiceInstancePriority', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 413, 1};
-
-encode_field('dot1qCustomerSourceMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 414, 6};
-
-encode_field('dot1qCustomerDestinationMacAddress', Value)
-  when is_binary(Value) andalso byte_size(Value) =:= 6 ->
-    {Value, 415, 6};
-
-encode_field('postLayer2OctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 417, 8};
-
-encode_field('postMCastLayer2OctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 418, 8};
-
-encode_field('postLayer2OctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 420, 8};
-
-encode_field('postMCastLayer2OctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 421, 8};
-
-encode_field('minimumLayer2TotalLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 422, 8};
-
-encode_field('maximumLayer2TotalLength', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 423, 8};
-
-encode_field('droppedLayer2OctetDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 424, 8};
-
-encode_field('droppedLayer2OctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 425, 8};
-
-encode_field('ignoredLayer2OctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 426, 8};
-
-encode_field('notSentLayer2OctetTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 427, 8};
-
-encode_field('layer2OctetDeltaSumOfSquares', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 428, 8};
-
-encode_field('layer2OctetTotalSumOfSquares', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 429, 8};
-
-encode_field('layer2FrameDeltaCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 430, 8};
-
-encode_field('layer2FrameTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 431, 8};
-
-encode_field('pseudoWireDestinationIPv4Address', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 432, 4};
-
-encode_field('ignoredLayer2FrameTotalCount', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 433, 8};
-
-encode_field('mibObjectValueInteger', Value)
-  when is_integer(Value) ->
-    {<<Value:64/signed-integer>>, 434, 8};
-
-encode_field('mibObjectValueOctetString', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 435, 65535};
-
-encode_field('mibObjectValueOID', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 436, 65535};
-
-encode_field('mibObjectValueBits', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 437, 65535};
-
-encode_field('mibObjectValueIPAddress', {A, B, C, D}) ->
-    {<<A, B, C, D>>, 438, 4};
-
-encode_field('mibObjectValueCounter', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 439, 8};
-
-encode_field('mibObjectValueGauge', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 440, 4};
-
-encode_field('mibObjectValueTimeTicks', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 441, 4};
-
-encode_field('mibObjectValueUnsigned', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 442, 8};
-
-%% 443 "mibObjectValueTable" subTemplateList "current";
-
-%% 444 "mibObjectValueRow" subTemplateList "current";
-
-encode_field('mibObjectIdentifier', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 445, 65535};
-
-encode_field('mibSubIdentifier', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:32/unsigned-integer>>, 446, 4};
-
-encode_field('mibIndexIndicator', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:64/unsigned-integer>>, 447, 8};
-
-encode_field('mibCaptureTimeSemantics', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:8/unsigned-integer>>, 448, 1};
-
-encode_field('mibContextEngineID', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 449, 65535};
-
-encode_field('mibContextName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 450, 65535};
-
-encode_field('mibObjectName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 451, 65535};
-
-encode_field('mibObjectDescription', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 452, 65535};
-
-encode_field('mibObjectSyntax', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 453, 65535};
-
-encode_field('mibModuleName', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 454, 65535};
-
-encode_field('mobileIMSI', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 455, 65535};
-
-encode_field('mobileMSISDN', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 456, 65535};
-
-encode_field('httpStatusCode', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 457, 2};
-
-encode_field('sourceTransportPortsLimit', Value)
-  when is_integer(Value) andalso Value >= 0 ->
-    {<<Value:16/unsigned-integer>>, 458, 2};
-
-encode_field('httpRequestMethod', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 459, 65535};
-
-encode_field('httpRequestHost', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 460, 65535};
-
-encode_field('httpRequestTarget', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 461, 65535};
-
-encode_field('httpMessageVersion', Value)
-  when is_binary(Value) ->
-    {encode_variable_field(Value), 462, 65535};
-
-encode_field(Id, Value)
-  when is_integer(Id) andalso is_binary(Value) ->
-    {Value, Id, byte_size(Value)};
-
-encode_field(Id, Value) ->
-    erlang:error(badarg, [Id, Value]).
-
+type_info('octetDeltaCount') -> {1, 'unsigned64'};
+type_info('packetDeltaCount') -> {2, 'unsigned64'};
+type_info('deltaFlowCount') -> {3, 'unsigned64'};
+type_info('protocolIdentifier') -> {4, 'unsigned8'};
+type_info('ipClassOfService') -> {5, 'unsigned8'};
+type_info('tcpControlBits') -> {6, 'unsigned16'};
+type_info('sourceTransportPort') -> {7, 'unsigned16'};
+type_info('sourceIPv4Address') -> {8, 'ipv4Address'};
+type_info('sourceIPv4PrefixLength') -> {9, 'unsigned8'};
+type_info('ingressInterface') -> {10, 'unsigned32'};
+type_info('destinationTransportPort') -> {11, 'unsigned16'};
+type_info('destinationIPv4Address') -> {12, 'ipv4Address'};
+type_info('destinationIPv4PrefixLength') -> {13, 'unsigned8'};
+type_info('egressInterface') -> {14, 'unsigned32'};
+type_info('ipNextHopIPv4Address') -> {15, 'ipv4Address'};
+type_info('bgpSourceAsNumber') -> {16, 'unsigned32'};
+type_info('bgpDestinationAsNumber') -> {17, 'unsigned32'};
+type_info('bgpNextHopIPv4Address') -> {18, 'ipv4Address'};
+type_info('postMCastPacketDeltaCount') -> {19, 'unsigned64'};
+type_info('postMCastOctetDeltaCount') -> {20, 'unsigned64'};
+type_info('flowEndSysUpTime') -> {21, 'unsigned32'};
+type_info('flowStartSysUpTime') -> {22, 'unsigned32'};
+type_info('postOctetDeltaCount') -> {23, 'unsigned64'};
+type_info('postPacketDeltaCount') -> {24, 'unsigned64'};
+type_info('minimumIpTotalLength') -> {25, 'unsigned64'};
+type_info('maximumIpTotalLength') -> {26, 'unsigned64'};
+type_info('sourceIPv6Address') -> {27, 'ipv6Address'};
+type_info('destinationIPv6Address') -> {28, 'ipv6Address'};
+type_info('sourceIPv6PrefixLength') -> {29, 'unsigned8'};
+type_info('destinationIPv6PrefixLength') -> {30, 'unsigned8'};
+type_info('flowLabelIPv6') -> {31, 'unsigned32'};
+type_info('icmpTypeCodeIPv4') -> {32, 'unsigned16'};
+type_info('igmpType') -> {33, 'unsigned8'};
+type_info('flowActiveTimeout') -> {36, 'unsigned16'};
+type_info('flowIdleTimeout') -> {37, 'unsigned16'};
+type_info('exportedOctetTotalCount') -> {40, 'unsigned64'};
+type_info('exportedMessageTotalCount') -> {41, 'unsigned64'};
+type_info('exportedFlowRecordTotalCount') -> {42, 'unsigned64'};
+type_info('sourceIPv4Prefix') -> {44, 'ipv4Address'};
+type_info('destinationIPv4Prefix') -> {45, 'ipv4Address'};
+type_info('mplsTopLabelType') -> {46, 'unsigned8'};
+type_info('mplsTopLabelIPv4Address') -> {47, 'ipv4Address'};
+type_info('minimumTTL') -> {52, 'unsigned8'};
+type_info('maximumTTL') -> {53, 'unsigned8'};
+type_info('fragmentIdentification') -> {54, 'unsigned32'};
+type_info('postIpClassOfService') -> {55, 'unsigned8'};
+type_info('sourceMacAddress') -> {56, 'macAddress'};
+type_info('postDestinationMacAddress') -> {57, 'macAddress'};
+type_info('vlanId') -> {58, 'unsigned16'};
+type_info('postVlanId') -> {59, 'unsigned16'};
+type_info('ipVersion') -> {60, 'unsigned8'};
+type_info('flowDirection') -> {61, 'unsigned8'};
+type_info('ipNextHopIPv6Address') -> {62, 'ipv6Address'};
+type_info('bgpNextHopIPv6Address') -> {63, 'ipv6Address'};
+type_info('ipv6ExtensionHeaders') -> {64, 'unsigned32'};
+type_info('mplsTopLabelStackSection') -> {70, 'octetArray'};
+type_info('mplsLabelStackSection2') -> {71, 'octetArray'};
+type_info('mplsLabelStackSection3') -> {72, 'octetArray'};
+type_info('mplsLabelStackSection4') -> {73, 'octetArray'};
+type_info('mplsLabelStackSection5') -> {74, 'octetArray'};
+type_info('mplsLabelStackSection6') -> {75, 'octetArray'};
+type_info('mplsLabelStackSection7') -> {76, 'octetArray'};
+type_info('mplsLabelStackSection8') -> {77, 'octetArray'};
+type_info('mplsLabelStackSection9') -> {78, 'octetArray'};
+type_info('mplsLabelStackSection10') -> {79, 'octetArray'};
+type_info('destinationMacAddress') -> {80, 'macAddress'};
+type_info('postSourceMacAddress') -> {81, 'macAddress'};
+type_info('interfaceName') -> {82, 'string'};
+type_info('interfaceDescription') -> {83, 'string'};
+type_info('octetTotalCount') -> {85, 'unsigned64'};
+type_info('packetTotalCount') -> {86, 'unsigned64'};
+type_info('fragmentOffset') -> {88, 'unsigned16'};
+type_info('forwardingStatus') -> {89, 'unsigned32'};
+type_info('mplsVpnRouteDistinguisher') -> {90, 'octetArray'};
+type_info('mplsTopLabelPrefixLength') -> {91, 'unsigned8'};
+type_info('srcTrafficIndex') -> {92, 'unsigned32'};
+type_info('dstTrafficIndex') -> {93, 'unsigned32'};
+type_info('applicationDescription') -> {94, 'string'};
+type_info('applicationId') -> {95, 'octetArray'};
+type_info('applicationName') -> {96, 'string'};
+type_info('postIpDiffServCodePoint') -> {98, 'unsigned8'};
+type_info('multicastReplicationFactor') -> {99, 'unsigned32'};
+type_info('classificationEngineId') -> {101, 'unsigned8'};
+type_info('bgpNextAdjacentAsNumber') -> {128, 'unsigned32'};
+type_info('bgpPrevAdjacentAsNumber') -> {129, 'unsigned32'};
+type_info('exporterIPv4Address') -> {130, 'ipv4Address'};
+type_info('exporterIPv6Address') -> {131, 'ipv6Address'};
+type_info('droppedOctetDeltaCount') -> {132, 'unsigned64'};
+type_info('droppedPacketDeltaCount') -> {133, 'unsigned64'};
+type_info('droppedOctetTotalCount') -> {134, 'unsigned64'};
+type_info('droppedPacketTotalCount') -> {135, 'unsigned64'};
+type_info('flowEndReason') -> {136, 'unsigned8'};
+type_info('commonPropertiesId') -> {137, 'unsigned64'};
+type_info('observationPointId') -> {138, 'unsigned64'};
+type_info('icmpTypeCodeIPv6') -> {139, 'unsigned16'};
+type_info('mplsTopLabelIPv6Address') -> {140, 'ipv6Address'};
+type_info('lineCardId') -> {141, 'unsigned32'};
+type_info('portId') -> {142, 'unsigned32'};
+type_info('meteringProcessId') -> {143, 'unsigned32'};
+type_info('exportingProcessId') -> {144, 'unsigned32'};
+type_info('templateId') -> {145, 'unsigned16'};
+type_info('wlanChannelId') -> {146, 'unsigned8'};
+type_info('wlanSSID') -> {147, 'string'};
+type_info('flowId') -> {148, 'unsigned64'};
+type_info('observationDomainId') -> {149, 'unsigned32'};
+type_info('flowStartSeconds') -> {150, 'dateTimeSeconds'};
+type_info('flowEndSeconds') -> {151, 'dateTimeSeconds'};
+type_info('flowStartMilliseconds') -> {152, 'dateTimeMilliseconds'};
+type_info('flowEndMilliseconds') -> {153, 'dateTimeMilliseconds'};
+type_info('flowStartMicroseconds') -> {154, 'dateTimeMicroseconds'};
+type_info('flowEndMicroseconds') -> {155, 'dateTimeMicroseconds'};
+type_info('flowStartNanoseconds') -> {156, 'dateTimeNanoseconds'};
+type_info('flowEndNanoseconds') -> {157, 'dateTimeNanoseconds'};
+type_info('flowStartDeltaMicroseconds') -> {158, 'unsigned32'};
+type_info('flowEndDeltaMicroseconds') -> {159, 'unsigned32'};
+type_info('systemInitTimeMilliseconds') -> {160, 'dateTimeMilliseconds'};
+type_info('flowDurationMilliseconds') -> {161, 'unsigned32'};
+type_info('flowDurationMicroseconds') -> {162, 'unsigned32'};
+type_info('observedFlowTotalCount') -> {163, 'unsigned64'};
+type_info('ignoredPacketTotalCount') -> {164, 'unsigned64'};
+type_info('ignoredOctetTotalCount') -> {165, 'unsigned64'};
+type_info('notSentFlowTotalCount') -> {166, 'unsigned64'};
+type_info('notSentPacketTotalCount') -> {167, 'unsigned64'};
+type_info('notSentOctetTotalCount') -> {168, 'unsigned64'};
+type_info('destinationIPv6Prefix') -> {169, 'ipv6Address'};
+type_info('sourceIPv6Prefix') -> {170, 'ipv6Address'};
+type_info('postOctetTotalCount') -> {171, 'unsigned64'};
+type_info('postPacketTotalCount') -> {172, 'unsigned64'};
+type_info('flowKeyIndicator') -> {173, 'unsigned64'};
+type_info('postMCastPacketTotalCount') -> {174, 'unsigned64'};
+type_info('postMCastOctetTotalCount') -> {175, 'unsigned64'};
+type_info('icmpTypeIPv4') -> {176, 'unsigned8'};
+type_info('icmpCodeIPv4') -> {177, 'unsigned8'};
+type_info('icmpTypeIPv6') -> {178, 'unsigned8'};
+type_info('icmpCodeIPv6') -> {179, 'unsigned8'};
+type_info('udpSourcePort') -> {180, 'unsigned16'};
+type_info('udpDestinationPort') -> {181, 'unsigned16'};
+type_info('tcpSourcePort') -> {182, 'unsigned16'};
+type_info('tcpDestinationPort') -> {183, 'unsigned16'};
+type_info('tcpSequenceNumber') -> {184, 'unsigned32'};
+type_info('tcpAcknowledgementNumber') -> {185, 'unsigned32'};
+type_info('tcpWindowSize') -> {186, 'unsigned16'};
+type_info('tcpUrgentPointer') -> {187, 'unsigned16'};
+type_info('tcpHeaderLength') -> {188, 'unsigned8'};
+type_info('ipHeaderLength') -> {189, 'unsigned8'};
+type_info('totalLengthIPv4') -> {190, 'unsigned16'};
+type_info('payloadLengthIPv6') -> {191, 'unsigned16'};
+type_info('ipTTL') -> {192, 'unsigned8'};
+type_info('nextHeaderIPv6') -> {193, 'unsigned8'};
+type_info('mplsPayloadLength') -> {194, 'unsigned32'};
+type_info('ipDiffServCodePoint') -> {195, 'unsigned8'};
+type_info('ipPrecedence') -> {196, 'unsigned8'};
+type_info('fragmentFlags') -> {197, 'unsigned8'};
+type_info('octetDeltaSumOfSquares') -> {198, 'unsigned64'};
+type_info('octetTotalSumOfSquares') -> {199, 'unsigned64'};
+type_info('mplsTopLabelTTL') -> {200, 'unsigned8'};
+type_info('mplsLabelStackLength') -> {201, 'unsigned32'};
+type_info('mplsLabelStackDepth') -> {202, 'unsigned32'};
+type_info('mplsTopLabelExp') -> {203, 'unsigned8'};
+type_info('ipPayloadLength') -> {204, 'unsigned32'};
+type_info('udpMessageLength') -> {205, 'unsigned16'};
+type_info('isMulticast') -> {206, 'unsigned8'};
+type_info('ipv4IHL') -> {207, 'unsigned8'};
+type_info('ipv4Options') -> {208, 'unsigned32'};
+type_info('tcpOptions') -> {209, 'unsigned64'};
+type_info('paddingOctets') -> {210, 'octetArray'};
+type_info('collectorIPv4Address') -> {211, 'ipv4Address'};
+type_info('collectorIPv6Address') -> {212, 'ipv6Address'};
+type_info('exportInterface') -> {213, 'unsigned32'};
+type_info('exportProtocolVersion') -> {214, 'unsigned8'};
+type_info('exportTransportProtocol') -> {215, 'unsigned8'};
+type_info('collectorTransportPort') -> {216, 'unsigned16'};
+type_info('exporterTransportPort') -> {217, 'unsigned16'};
+type_info('tcpSynTotalCount') -> {218, 'unsigned64'};
+type_info('tcpFinTotalCount') -> {219, 'unsigned64'};
+type_info('tcpRstTotalCount') -> {220, 'unsigned64'};
+type_info('tcpPshTotalCount') -> {221, 'unsigned64'};
+type_info('tcpAckTotalCount') -> {222, 'unsigned64'};
+type_info('tcpUrgTotalCount') -> {223, 'unsigned64'};
+type_info('ipTotalLength') -> {224, 'unsigned64'};
+type_info('postNATSourceIPv4Address') -> {225, 'ipv4Address'};
+type_info('postNATDestinationIPv4Address') -> {226, 'ipv4Address'};
+type_info('postNAPTSourceTransportPort') -> {227, 'unsigned16'};
+type_info('postNAPTDestinationTransportPort') -> {228, 'unsigned16'};
+type_info('natOriginatingAddressRealm') -> {229, 'unsigned8'};
+type_info('natEvent') -> {230, 'unsigned8'};
+type_info('initiatorOctets') -> {231, 'unsigned64'};
+type_info('responderOctets') -> {232, 'unsigned64'};
+type_info('firewallEvent') -> {233, 'unsigned8'};
+type_info('ingressVRFID') -> {234, 'unsigned32'};
+type_info('egressVRFID') -> {235, 'unsigned32'};
+type_info('VRFname') -> {236, 'string'};
+type_info('postMplsTopLabelExp') -> {237, 'unsigned8'};
+type_info('tcpWindowScale') -> {238, 'unsigned16'};
+type_info('biflowDirection') -> {239, 'unsigned8'};
+type_info('ethernetHeaderLength') -> {240, 'unsigned8'};
+type_info('ethernetPayloadLength') -> {241, 'unsigned16'};
+type_info('ethernetTotalLength') -> {242, 'unsigned16'};
+type_info('dot1qVlanId') -> {243, 'unsigned16'};
+type_info('dot1qPriority') -> {244, 'unsigned8'};
+type_info('dot1qCustomerVlanId') -> {245, 'unsigned16'};
+type_info('dot1qCustomerPriority') -> {246, 'unsigned8'};
+type_info('metroEvcId') -> {247, 'string'};
+type_info('metroEvcType') -> {248, 'unsigned8'};
+type_info('pseudoWireId') -> {249, 'unsigned32'};
+type_info('pseudoWireType') -> {250, 'unsigned16'};
+type_info('pseudoWireControlWord') -> {251, 'unsigned32'};
+type_info('ingressPhysicalInterface') -> {252, 'unsigned32'};
+type_info('egressPhysicalInterface') -> {253, 'unsigned32'};
+type_info('postDot1qVlanId') -> {254, 'unsigned16'};
+type_info('postDot1qCustomerVlanId') -> {255, 'unsigned16'};
+type_info('ethernetType') -> {256, 'unsigned16'};
+type_info('postIpPrecedence') -> {257, 'unsigned8'};
+type_info('collectionTimeMilliseconds') -> {258, 'dateTimeMilliseconds'};
+type_info('exportSctpStreamId') -> {259, 'unsigned16'};
+type_info('maxExportSeconds') -> {260, 'dateTimeSeconds'};
+type_info('maxFlowEndSeconds') -> {261, 'dateTimeSeconds'};
+type_info('messageMD5Checksum') -> {262, 'octetArray'};
+type_info('messageScope') -> {263, 'unsigned8'};
+type_info('minExportSeconds') -> {264, 'dateTimeSeconds'};
+type_info('minFlowStartSeconds') -> {265, 'dateTimeSeconds'};
+type_info('opaqueOctets') -> {266, 'octetArray'};
+type_info('sessionScope') -> {267, 'unsigned8'};
+type_info('maxFlowEndMicroseconds') -> {268, 'dateTimeMicroseconds'};
+type_info('maxFlowEndMilliseconds') -> {269, 'dateTimeMilliseconds'};
+type_info('maxFlowEndNanoseconds') -> {270, 'dateTimeNanoseconds'};
+type_info('minFlowStartMicroseconds') -> {271, 'dateTimeMicroseconds'};
+type_info('minFlowStartMilliseconds') -> {272, 'dateTimeMilliseconds'};
+type_info('minFlowStartNanoseconds') -> {273, 'dateTimeNanoseconds'};
+type_info('collectorCertificate') -> {274, 'octetArray'};
+type_info('exporterCertificate') -> {275, 'octetArray'};
+type_info('dataRecordsReliability') -> {276, 'boolean'};
+type_info('observationPointType') -> {277, 'unsigned8'};
+type_info('newConnectionDeltaCount') -> {278, 'unsigned32'};
+type_info('connectionSumDurationSeconds') -> {279, 'unsigned64'};
+type_info('connectionTransactionId') -> {280, 'unsigned64'};
+type_info('postNATSourceIPv6Address') -> {281, 'ipv6Address'};
+type_info('postNATDestinationIPv6Address') -> {282, 'ipv6Address'};
+type_info('natPoolId') -> {283, 'unsigned32'};
+type_info('natPoolName') -> {284, 'string'};
+type_info('anonymizationFlags') -> {285, 'unsigned16'};
+type_info('anonymizationTechnique') -> {286, 'unsigned16'};
+type_info('informationElementIndex') -> {287, 'unsigned16'};
+type_info('p2pTechnology') -> {288, 'string'};
+type_info('tunnelTechnology') -> {289, 'string'};
+type_info('encryptedTechnology') -> {290, 'string'};
+type_info('basicList') -> {291, 'basicList'};
+type_info('subTemplateList') -> {292, 'subTemplateList'};
+type_info('subTemplateMultiList') -> {293, 'subTemplateMultiList'};
+type_info('bgpValidityState') -> {294, 'unsigned8'};
+type_info('IPSecSPI') -> {295, 'unsigned32'};
+type_info('greKey') -> {296, 'unsigned32'};
+type_info('natType') -> {297, 'unsigned8'};
+type_info('initiatorPackets') -> {298, 'unsigned64'};
+type_info('responderPackets') -> {299, 'unsigned64'};
+type_info('observationDomainName') -> {300, 'string'};
+type_info('selectionSequenceId') -> {301, 'unsigned64'};
+type_info('selectorId') -> {302, 'unsigned64'};
+type_info('informationElementId') -> {303, 'unsigned16'};
+type_info('selectorAlgorithm') -> {304, 'unsigned16'};
+type_info('samplingPacketInterval') -> {305, 'unsigned32'};
+type_info('samplingPacketSpace') -> {306, 'unsigned32'};
+type_info('samplingTimeInterval') -> {307, 'unsigned32'};
+type_info('samplingTimeSpace') -> {308, 'unsigned32'};
+type_info('samplingSize') -> {309, 'unsigned32'};
+type_info('samplingPopulation') -> {310, 'unsigned32'};
+type_info('samplingProbability') -> {311, 'float64'};
+type_info('dataLinkFrameSize') -> {312, 'unsigned16'};
+type_info('ipHeaderPacketSection') -> {313, 'octetArray'};
+type_info('ipPayloadPacketSection') -> {314, 'octetArray'};
+type_info('dataLinkFrameSection') -> {315, 'octetArray'};
+type_info('mplsLabelStackSection') -> {316, 'octetArray'};
+type_info('mplsPayloadPacketSection') -> {317, 'octetArray'};
+type_info('selectorIdTotalPktsObserved') -> {318, 'unsigned64'};
+type_info('selectorIdTotalPktsSelected') -> {319, 'unsigned64'};
+type_info('absoluteError') -> {320, 'float64'};
+type_info('relativeError') -> {321, 'float64'};
+type_info('observationTimeSeconds') -> {322, 'dateTimeSeconds'};
+type_info('observationTimeMilliseconds') -> {323, 'dateTimeMilliseconds'};
+type_info('observationTimeMicroseconds') -> {324, 'dateTimeMicroseconds'};
+type_info('observationTimeNanoseconds') -> {325, 'dateTimeNanoseconds'};
+type_info('digestHashValue') -> {326, 'unsigned64'};
+type_info('hashIPPayloadOffset') -> {327, 'unsigned64'};
+type_info('hashIPPayloadSize') -> {328, 'unsigned64'};
+type_info('hashOutputRangeMin') -> {329, 'unsigned64'};
+type_info('hashOutputRangeMax') -> {330, 'unsigned64'};
+type_info('hashSelectedRangeMin') -> {331, 'unsigned64'};
+type_info('hashSelectedRangeMax') -> {332, 'unsigned64'};
+type_info('hashDigestOutput') -> {333, 'boolean'};
+type_info('hashInitialiserValue') -> {334, 'unsigned64'};
+type_info('selectorName') -> {335, 'string'};
+type_info('upperCILimit') -> {336, 'float64'};
+type_info('lowerCILimit') -> {337, 'float64'};
+type_info('confidenceLevel') -> {338, 'float64'};
+type_info('informationElementDataType') -> {339, 'unsigned8'};
+type_info('informationElementDescription') -> {340, 'string'};
+type_info('informationElementName') -> {341, 'string'};
+type_info('informationElementRangeBegin') -> {342, 'unsigned64'};
+type_info('informationElementRangeEnd') -> {343, 'unsigned64'};
+type_info('informationElementSemantics') -> {344, 'unsigned8'};
+type_info('informationElementUnits') -> {345, 'unsigned16'};
+type_info('privateEnterpriseNumber') -> {346, 'unsigned32'};
+type_info('virtualStationInterfaceId') -> {347, 'octetArray'};
+type_info('virtualStationInterfaceName') -> {348, 'string'};
+type_info('virtualStationUUID') -> {349, 'octetArray'};
+type_info('virtualStationName') -> {350, 'string'};
+type_info('layer2SegmentId') -> {351, 'unsigned64'};
+type_info('layer2OctetDeltaCount') -> {352, 'unsigned64'};
+type_info('layer2OctetTotalCount') -> {353, 'unsigned64'};
+type_info('ingressUnicastPacketTotalCount') -> {354, 'unsigned64'};
+type_info('ingressMulticastPacketTotalCount') -> {355, 'unsigned64'};
+type_info('ingressBroadcastPacketTotalCount') -> {356, 'unsigned64'};
+type_info('egressUnicastPacketTotalCount') -> {357, 'unsigned64'};
+type_info('egressBroadcastPacketTotalCount') -> {358, 'unsigned64'};
+type_info('monitoringIntervalStartMilliSeconds') -> {359, 'dateTimeMilliseconds'};
+type_info('monitoringIntervalEndMilliSeconds') -> {360, 'dateTimeMilliseconds'};
+type_info('portRangeStart') -> {361, 'unsigned16'};
+type_info('portRangeEnd') -> {362, 'unsigned16'};
+type_info('portRangeStepSize') -> {363, 'unsigned16'};
+type_info('portRangeNumPorts') -> {364, 'unsigned16'};
+type_info('staMacAddress') -> {365, 'macAddress'};
+type_info('staIPv4Address') -> {366, 'ipv4Address'};
+type_info('wtpMacAddress') -> {367, 'macAddress'};
+type_info('ingressInterfaceType') -> {368, 'unsigned32'};
+type_info('egressInterfaceType') -> {369, 'unsigned32'};
+type_info('rtpSequenceNumber') -> {370, 'unsigned16'};
+type_info('userName') -> {371, 'string'};
+type_info('applicationCategoryName') -> {372, 'string'};
+type_info('applicationSubCategoryName') -> {373, 'string'};
+type_info('applicationGroupName') -> {374, 'string'};
+type_info('originalFlowsPresent') -> {375, 'unsigned64'};
+type_info('originalFlowsInitiated') -> {376, 'unsigned64'};
+type_info('originalFlowsCompleted') -> {377, 'unsigned64'};
+type_info('distinctCountOfSourceIPAddress') -> {378, 'unsigned64'};
+type_info('distinctCountOfDestinationIPAddress') -> {379, 'unsigned64'};
+type_info('distinctCountOfSourceIPv4Address') -> {380, 'unsigned32'};
+type_info('distinctCountOfDestinationIPv4Address') -> {381, 'unsigned32'};
+type_info('distinctCountOfSourceIPv6Address') -> {382, 'unsigned64'};
+type_info('distinctCountOfDestinationIPv6Address') -> {383, 'unsigned64'};
+type_info('valueDistributionMethod') -> {384, 'unsigned8'};
+type_info('rfc3550JitterMilliseconds') -> {385, 'unsigned32'};
+type_info('rfc3550JitterMicroseconds') -> {386, 'unsigned32'};
+type_info('rfc3550JitterNanoseconds') -> {387, 'unsigned32'};
+type_info('dot1qDEI') -> {388, 'boolean'};
+type_info('dot1qCustomerDEI') -> {389, 'boolean'};
+type_info('flowSelectorAlgorithm') -> {390, 'unsigned16'};
+type_info('flowSelectedOctetDeltaCount') -> {391, 'unsigned64'};
+type_info('flowSelectedPacketDeltaCount') -> {392, 'unsigned64'};
+type_info('flowSelectedFlowDeltaCount') -> {393, 'unsigned64'};
+type_info('selectorIDTotalFlowsObserved') -> {394, 'unsigned64'};
+type_info('selectorIDTotalFlowsSelected') -> {395, 'unsigned64'};
+type_info('samplingFlowInterval') -> {396, 'unsigned64'};
+type_info('samplingFlowSpacing') -> {397, 'unsigned64'};
+type_info('flowSamplingTimeInterval') -> {398, 'unsigned64'};
+type_info('flowSamplingTimeSpacing') -> {399, 'unsigned64'};
+type_info('hashFlowDomain') -> {400, 'unsigned16'};
+type_info('transportOctetDeltaCount') -> {401, 'unsigned64'};
+type_info('transportPacketDeltaCount') -> {402, 'unsigned64'};
+type_info('originalExporterIPv4Address') -> {403, 'ipv4Address'};
+type_info('originalExporterIPv6Address') -> {404, 'ipv6Address'};
+type_info('originalObservationDomainId') -> {405, 'unsigned32'};
+type_info('intermediateProcessId') -> {406, 'unsigned32'};
+type_info('ignoredDataRecordTotalCount') -> {407, 'unsigned64'};
+type_info('dataLinkFrameType') -> {408, 'unsigned16'};
+type_info('sectionOffset') -> {409, 'unsigned16'};
+type_info('sectionExportedOctets') -> {410, 'unsigned16'};
+type_info('dot1qServiceInstanceTag') -> {411, 'octetArray'};
+type_info('dot1qServiceInstanceId') -> {412, 'unsigned32'};
+type_info('dot1qServiceInstancePriority') -> {413, 'unsigned8'};
+type_info('dot1qCustomerSourceMacAddress') -> {414, 'macAddress'};
+type_info('dot1qCustomerDestinationMacAddress') -> {415, 'macAddress'};
+type_info('postLayer2OctetDeltaCount') -> {417, 'unsigned64'};
+type_info('postMCastLayer2OctetDeltaCount') -> {418, 'unsigned64'};
+type_info('postLayer2OctetTotalCount') -> {420, 'unsigned64'};
+type_info('postMCastLayer2OctetTotalCount') -> {421, 'unsigned64'};
+type_info('minimumLayer2TotalLength') -> {422, 'unsigned64'};
+type_info('maximumLayer2TotalLength') -> {423, 'unsigned64'};
+type_info('droppedLayer2OctetDeltaCount') -> {424, 'unsigned64'};
+type_info('droppedLayer2OctetTotalCount') -> {425, 'unsigned64'};
+type_info('ignoredLayer2OctetTotalCount') -> {426, 'unsigned64'};
+type_info('notSentLayer2OctetTotalCount') -> {427, 'unsigned64'};
+type_info('layer2OctetDeltaSumOfSquares') -> {428, 'unsigned64'};
+type_info('layer2OctetTotalSumOfSquares') -> {429, 'unsigned64'};
+type_info('layer2FrameDeltaCount') -> {430, 'unsigned64'};
+type_info('layer2FrameTotalCount') -> {431, 'unsigned64'};
+type_info('pseudoWireDestinationIPv4Address') -> {432, 'ipv4Address'};
+type_info('ignoredLayer2FrameTotalCount') -> {433, 'unsigned64'};
+type_info('mibObjectValueInteger') -> {434, 'signed64'};
+type_info('mibObjectValueOctetString') -> {435, 'octetArray'};
+type_info('mibObjectValueOID') -> {436, 'octetArray'};
+type_info('mibObjectValueBits') -> {437, 'octetArray'};
+type_info('mibObjectValueIPAddress') -> {438, 'ipv4Address'};
+type_info('mibObjectValueCounter') -> {439, 'unsigned64'};
+type_info('mibObjectValueGauge') -> {440, 'unsigned32'};
+type_info('mibObjectValueTimeTicks') -> {441, 'unsigned32'};
+type_info('mibObjectValueUnsigned') -> {442, 'unsigned64'};
+type_info('mibObjectValueTable') -> {443, 'subTemplateList'};
+type_info('mibObjectValueRow') -> {444, 'subTemplateList'};
+type_info('mibObjectIdentifier') -> {445, 'octetArray'};
+type_info('mibSubIdentifier') -> {446, 'unsigned32'};
+type_info('mibIndexIndicator') -> {447, 'unsigned64'};
+type_info('mibCaptureTimeSemantics') -> {448, 'unsigned8'};
+type_info('mibContextEngineID') -> {449, 'octetArray'};
+type_info('mibContextName') -> {450, 'string'};
+type_info('mibObjectName') -> {451, 'string'};
+type_info('mibObjectDescription') -> {452, 'string'};
+type_info('mibObjectSyntax') -> {453, 'string'};
+type_info('mibModuleName') -> {454, 'string'};
+type_info('mobileIMSI') -> {455, 'string'};
+type_info('mobileMSISDN') -> {456, 'string'};
+type_info('httpStatusCode') -> {457, 'unsigned16'};
+type_info('sourceTransportPortsLimit') -> {458, 'unsigned16'};
+type_info('httpRequestMethod') -> {459, 'string'};
+type_info('httpRequestHost') -> {460, 'string'};
+type_info('httpRequestTarget') -> {461, 'string'};
+type_info('httpMessageVersion') -> {462, 'string'};
+type_info(Id) ->
+    erlang:error(badarg, [Id]).
