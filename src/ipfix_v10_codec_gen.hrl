@@ -1162,11 +1162,11 @@ typecast_field(Value, 290, Length)
   when byte_size(Value) == Length ->
     {'encryptedTechnology', Value};
 
-%% 291 "basicList" basicList "current";
+%% 291 "basicList" basicList;
 
-%% 292 "subTemplateList" subTemplateList "current";
+%% 292 "subTemplateList" subTemplateList;
 
-%% 293 "subTemplateMultiList" subTemplateMultiList "current";
+%% 293 "subTemplateMultiList" subTemplateMultiList;
 
 typecast_field(Bin, 294, Length)
   when Length =< 1 ->

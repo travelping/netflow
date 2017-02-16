@@ -92,11 +92,38 @@ reencode_test(_Config) ->
        domain_id   = DomainId} = Header,
     ?equal(Binary, ipfix_v10_codec:encode(ExportTime, FlowSeq, DomainId, 256, Fields)).
 
+define_template(_Config) ->
+    Template = ['flowStartMilliseconds', 'flowEndMilliseconds'],
+    ?match({'ipfix_set', _, _, _}, ipfix_v10_codec:compile_template(1, 256, Template)),
+    ?match({'ipfix_set', _, _, _}, ipfix_v10_codec:compile_template(1, 256, [])),
+    ?match({'EXIT', {function_clause, _}}, (catch ipfix_v10_codec:compile_template(a, 256, Template))),
+    ?match({'EXIT', {function_clause, _}}, (catch ipfix_v10_codec:compile_template(1, a, Template))),
+    ?match({'EXIT', {function_clause, _}}, (catch ipfix_v10_codec:compile_template(1, 0, Template))),
+    ?match({'EXIT', {badarg, _}}, (catch ipfix_v10_codec:compile_template(1, 256, [uncompiled]))),
+    ok.
+
+encode_template(_Config) ->
+    DomainId = 1,
+    TemplateId = 256,
+    Template = ['flowStartMilliseconds', 'flowEndMilliseconds'],
+    BadRecs = [ {TemplateId, []} ],
+    RecList = {TemplateId, [{'flowStartMilliseconds', 1},
+			    {'flowEndMilliseconds',   2}]},
+    RecMap = {TemplateId, #{'flowStartMilliseconds' => 4,
+			    'flowEndMilliseconds'   => 5}},
+    TDef = ipfix_v10_codec:compile_template(DomainId, TemplateId, Template),
+    ?match({'EXIT', {badarg, _}},
+	   (catch ipfix_v10_codec:encode_with_template(0, 1, DomainId, [TDef], BadRecs, true))),
+    ?equal(ok, (catch ipfix_v10_codec:encode_with_template(0, 1, DomainId, [TDef], [RecList, RecMap], true))),
+    ?equal(ok, (catch ipfix_v10_codec:encode_with_template(0, 1, DomainId, [TDef], [RecMap, RecList], true))),
+    ok.
+
 %% ---------------------------------------------------------------------
 %% -- common_test callbacks
 
 all() ->
-    [decode_test, encode_test, redecode_test, reencode_test].
+    [decode_test, encode_test, redecode_test, reencode_test,
+     define_template, encode_template].
 
 init_per_testcase(_, Config) ->
     ok = ipfix_v10_codec:init(),

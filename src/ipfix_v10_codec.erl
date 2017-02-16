@@ -6,13 +6,15 @@
 
 %% API
 -export([init/0]).
--export([decode/2]).
--export([encode/5]).
+-export([decode/2, encode/5]).
+-export([compile_template/2, encode_with_template/6]).
 
 -include("ipfix_v10.hrl").
 
 -define(TEMPLATES_TABLE, ipfix_v10_templates).
 -define(TEMPLATES_TABLE_OPTS, [named_table, public, {read_concurrency, true}]).
+
+-record(ipfix_set, {type, id, elements}).
 
 %%%===================================================================
 %%% API
@@ -57,9 +59,87 @@ encode(ExportTime, FlowSeq, DomainId, TemplateId, Records) ->
     Header = <<10:16, (Length + 16):16, ExportTime:32, FlowSeq:32, DomainId:32>>,
     list_to_binary([Header, Template, DataFlowset]).
 
+compile_template(TemplateId, Records)
+  when is_integer(TemplateId), TemplateId >= 256, is_list(Records) ->
+    Map = lists:map(fun process_template_def/1, Records),
+    #ipfix_set{type = template, id = TemplateId, elements = Map}.
+
+encode_with_template(ExportTime, FlowSeq, DomainId, Templates, Records, SendTemplates)
+  when is_integer(ExportTime), is_integer(FlowSeq), is_integer(DomainId),
+       is_list(Templates), is_list(Records), is_boolean(SendTemplates) ->
+
+    {TemplateSets, TDefs} = process_template_sets(Templates, SendTemplates),
+    DataFlowSets = encode_data_sets(Records, TDefs),
+    Length = byte_size(TemplateSets) + byte_size(DataFlowSets),
+    Header = <<10:16, (Length + 16):16, ExportTime:32, FlowSeq:32, DomainId:32>>,
+    iolist_to_binary([Header, TemplateSets, DataFlowSets]).
+
 %%%===================================================================
 %%% Internal functions
 %%%===================================================================
+
+may_append_set(_SetId, [], Acc) ->
+    Acc;
+may_append_set(SetId, Set, Acc) ->
+    BinSet = iolist_to_binary(Set),
+    <<Acc/binary, SetId:16, (byte_size(BinSet) + 4):16, BinSet/binary>>.
+
+encode_template(TemplateId, IEs) ->
+    Bin = << <<Id:16, Size:16>> || {_Key, Id, _Type, Size} <- IEs >>,
+    <<TemplateId:16, (length(IEs)):16, Bin/binary>>.
+
+encode_template_set(#ipfix_set{type = template, id = Id, elements = IEs}, {Set2, Set3, TDef}) ->
+    Set = encode_template(Id, IEs),
+    {[Set | Set2], Set3, TDef#{Id => IEs}};
+encode_template_set(#ipfix_set{type = scoped, id = Id, elements = IEs}, {Set2, Set3, TDef}) ->
+    Set = encode_template(Id, IEs),
+    {Set2, [Set | Set3], TDef#{Id => IEs}};
+encode_template_set(_,  Acc) ->
+    Acc.
+
+process_template_sets(Templates, true) ->
+    {Set2, Set3, TDef} = lists:foldl(fun encode_template_set/2, {[], [], #{}}, Templates),
+    T0 = may_append_set(2, lists:reverse(Set2), <<>>),
+    T1 = may_append_set(3, lists:reverse(Set3), T0),
+    {T1, TDef};
+process_template_sets(Templates, false) ->
+    TDef = lists:foldl(fun(#ipfix_set{id = Id, elements = IEs}, Acc) ->
+			       Acc#{Id => IEs};
+			  (_, Acc) ->
+			       Acc
+		       end, #{}, Templates),
+    {<<>>, TDef}.
+
+set_get_value(Key, Fields) when is_list(Fields) ->
+    proplists:get_value(Key, Fields, undefined);
+set_get_value(Key, Fields) when is_map(Fields) ->
+    maps:get(Key, Fields, undefined).
+
+encode_fields([], _Fields, Acc) ->
+    Acc;
+encode_fields([{Key, _Id, Type, _Size} | T], Fields, Acc) ->
+    case set_get_value(Key, Fields) of
+	undefined ->
+	    erlang:error(badarg, [Key]);
+	Value ->
+	    Bin = encode_field_value(Type, Value),
+	    encode_fields(T, Fields, <<Acc/binary, Bin/binary>>)
+    end.
+
+encode_data_set({TemplateId, Fields} = Record, TDefs, Acc) ->
+    case maps:get(TemplateId, TDefs, undefined) of
+	undefined ->
+	    erlang:error(badarg, [Record]);
+	IEs ->
+	    Bin = encode_fields(IEs, Fields, <<>>),
+	    maps:update_with(TemplateId, fun(X) -> <<X/binary, Bin/binary>> end, Bin, Acc)
+    end.
+
+encode_data_sets(Records, TDefs) ->
+    Sets = lists:foldl(fun(Record, Acc) -> encode_data_set(Record, TDefs, Acc) end, #{}, Records),
+    maps:fold(fun(SetId, Bin, Acc) ->
+		      <<Acc/binary, SetId:16, (byte_size(Bin) + 4):16, Bin/binary>>
+	      end, <<>>, Sets).
 
 encode_fields(Fields) ->
     << << (encode_field(F, V))/binary >> || {F, V} <- Fields >>.
@@ -208,6 +288,20 @@ encode_variable_field(Value) ->
 
 bin2bool(<<1>>) -> true;
 bin2bool(<<2>>) -> false.
+
+process_template_def(Key) when is_atom(Key) ->
+    {Id, Type} = type_info(Key),
+    {Key, Id, Type, type_size(Type)};
+process_template_def({Key, Size} = Def) when is_atom(Key) ->
+    {Id, Type} = type_info(Key),
+    case type_size(Type) of
+	Len when Len >= Size ->
+	    {Key, Id, Type, Size};
+	_ ->
+	   erlang:error(badarg, [Def])
+    end;
+process_template_def(Key) ->
+    erlang:error(badarg, [Key]).
 
 %%%===================================================================
 
