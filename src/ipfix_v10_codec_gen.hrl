@@ -39,7 +39,8 @@ typecast_field(Bin, 7, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'sourceTransportPort', Value};
 
-typecast_field(<<A, B, C, D>>, 8, 4) ->
+typecast_field(Bin, 8, 4) ->
+    <<A, B, C, D>> = Bin,
     {'sourceIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 9, Length)
@@ -57,7 +58,8 @@ typecast_field(Bin, 11, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'destinationTransportPort', Value};
 
-typecast_field(<<A, B, C, D>>, 12, 4) ->
+typecast_field(Bin, 12, 4) ->
+    <<A, B, C, D>> = Bin,
     {'destinationIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 13, Length)
@@ -70,7 +72,8 @@ typecast_field(Bin, 14, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'egressInterface', Value};
 
-typecast_field(<<A, B, C, D>>, 15, 4) ->
+typecast_field(Bin, 15, 4) ->
+    <<A, B, C, D>> = Bin,
     {'ipNextHopIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 16, Length)
@@ -83,7 +86,8 @@ typecast_field(Bin, 17, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'bgpDestinationAsNumber', Value};
 
-typecast_field(<<A, B, C, D>>, 18, 4) ->
+typecast_field(Bin, 18, 4) ->
+    <<A, B, C, D>> = Bin,
     {'bgpNextHopIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 19, Length)
@@ -126,10 +130,12 @@ typecast_field(Bin, 26, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'maximumIpTotalLength', Value};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 27, 16) ->
+typecast_field(Bin, 27, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'sourceIPv6Address', {A, B, C, D, E, F, G, H}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 28, 16) ->
+typecast_field(Bin, 28, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'destinationIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 29, Length)
@@ -182,10 +188,12 @@ typecast_field(Bin, 42, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'exportedFlowRecordTotalCount', Value};
 
-typecast_field(<<A, B, C, D>>, 44, 4) ->
+typecast_field(Bin, 44, 4) ->
+    <<A, B, C, D>> = Bin,
     {'sourceIPv4Prefix', {A, B, C, D}};
 
-typecast_field(<<A, B, C, D>>, 45, 4) ->
+typecast_field(Bin, 45, 4) ->
+    <<A, B, C, D>> = Bin,
     {'destinationIPv4Prefix', {A, B, C, D}};
 
 typecast_field(Bin, 46, Length)
@@ -193,7 +201,8 @@ typecast_field(Bin, 46, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'mplsTopLabelType', Value};
 
-typecast_field(<<A, B, C, D>>, 47, 4) ->
+typecast_field(Bin, 47, 4) ->
+    <<A, B, C, D>> = Bin,
     {'mplsTopLabelIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 52, Length)
@@ -244,10 +253,12 @@ typecast_field(Bin, 61, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'flowDirection', Value};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 62, 16) ->
+typecast_field(Bin, 62, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'ipNextHopIPv6Address', {A, B, C, D, E, F, G, H}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 63, 16) ->
+typecast_field(Bin, 63, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'bgpNextHopIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 64, Length)
@@ -387,10 +398,12 @@ typecast_field(Bin, 129, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'bgpPrevAdjacentAsNumber', Value};
 
-typecast_field(<<A, B, C, D>>, 130, 4) ->
+typecast_field(Bin, 130, 4) ->
+    <<A, B, C, D>> = Bin,
     {'exporterIPv4Address', {A, B, C, D}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 131, 16) ->
+typecast_field(Bin, 131, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'exporterIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 132, Length)
@@ -433,7 +446,8 @@ typecast_field(Bin, 139, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'icmpTypeCodeIPv6', Value};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 140, 16) ->
+typecast_field(Bin, 140, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'mplsTopLabelIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 141, Length)
@@ -500,17 +514,17 @@ typecast_field(Bin, 153, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'flowEndMilliseconds', Value};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 154, 8) ->
-    {'flowStartMicroseconds', {Seconds, Fraction}};
+typecast_field(Bin, 154, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'flowStartMicroseconds', {Seconds, Fraction}};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 155, 8) ->
-    {'flowEndMicroseconds', {Seconds, Fraction}};
+typecast_field(Bin, 155, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'flowEndMicroseconds', {Seconds, Fraction}};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 156, 8) ->
-    {'flowStartNanoseconds', {Seconds, Fraction}};
+typecast_field(Bin, 156, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'flowStartNanoseconds', {Seconds, Fraction}};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 157, 8) ->
-    {'flowEndNanoseconds', {Seconds, Fraction}};
+typecast_field(Bin, 157, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'flowEndNanoseconds', {Seconds, Fraction}};
 
 typecast_field(Bin, 158, Length)
   when Length =< 4 ->
@@ -567,10 +581,12 @@ typecast_field(Bin, 168, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'notSentOctetTotalCount', Value};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 169, 16) ->
+typecast_field(Bin, 169, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'destinationIPv6Prefix', {A, B, C, D, E, F, G, H}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 170, 16) ->
+typecast_field(Bin, 170, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'sourceIPv6Prefix', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 171, Length)
@@ -772,10 +788,12 @@ typecast_field(Value, 210, Length)
   when byte_size(Value) == Length ->
     {'paddingOctets', Value};
 
-typecast_field(<<A, B, C, D>>, 211, 4) ->
+typecast_field(Bin, 211, 4) ->
+    <<A, B, C, D>> = Bin,
     {'collectorIPv4Address', {A, B, C, D}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 212, 16) ->
+typecast_field(Bin, 212, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'collectorIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 213, Length)
@@ -838,10 +856,12 @@ typecast_field(Bin, 224, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'ipTotalLength', Value};
 
-typecast_field(<<A, B, C, D>>, 225, 4) ->
+typecast_field(Bin, 225, 4) ->
+    <<A, B, C, D>> = Bin,
     {'postNATSourceIPv4Address', {A, B, C, D}};
 
-typecast_field(<<A, B, C, D>>, 226, 4) ->
+typecast_field(Bin, 226, 4) ->
+    <<A, B, C, D>> = Bin,
     {'postNATDestinationIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 227, Length)
@@ -1045,27 +1065,27 @@ typecast_field(Bin, 267, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'sessionScope', Value};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 268, 8) ->
-    {'maxFlowEndMicroseconds', {Seconds, Fraction}};
+typecast_field(Bin, 268, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'maxFlowEndMicroseconds', {Seconds, Fraction}};
 
 typecast_field(Bin, 269, Length)
   when Length =< 8 ->
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'maxFlowEndMilliseconds', Value};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 270, 8) ->
-    {'maxFlowEndNanoseconds', {Seconds, Fraction}};
+typecast_field(Bin, 270, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'maxFlowEndNanoseconds', {Seconds, Fraction}};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 271, 8) ->
-    {'minFlowStartMicroseconds', {Seconds, Fraction}};
+typecast_field(Bin, 271, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'minFlowStartMicroseconds', {Seconds, Fraction}};
 
 typecast_field(Bin, 272, Length)
   when Length =< 8 ->
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'minFlowStartMilliseconds', Value};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 273, 8) ->
-    {'minFlowStartNanoseconds', {Seconds, Fraction}};
+typecast_field(Bin, 273, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'minFlowStartNanoseconds', {Seconds, Fraction}};
 
 typecast_field(Value, 274, Length)
   when byte_size(Value) == Length ->
@@ -1075,8 +1095,8 @@ typecast_field(Value, 275, Length)
   when byte_size(Value) == Length ->
     {'exporterCertificate', Value};
 
-typecast_field(<<1>>, 276, 1) ->
-    {'dataRecordsReliability', true};
+typecast_field(Bin, 276, 1) ->
+    {'dataRecordsReliability', bin2bool(Bin)};
 
 typecast_field(Bin, 277, Length)
   when Length =< 1 ->
@@ -1098,10 +1118,12 @@ typecast_field(Bin, 280, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'connectionTransactionId', Value};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 281, 16) ->
+typecast_field(Bin, 281, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'postNATSourceIPv6Address', {A, B, C, D, E, F, G, H}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 282, 16) ->
+typecast_field(Bin, 282, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'postNATDestinationIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 283, Length)
@@ -1290,11 +1312,11 @@ typecast_field(Bin, 323, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'observationTimeMilliseconds', Value};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 324, 8) ->
-    {'observationTimeMicroseconds', {Seconds, Fraction}};
+typecast_field(Bin, 324, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'observationTimeMicroseconds', {Seconds, Fraction}};
 
-typecast_field(<<Seconds:32, Fraction:32>>, 325, 8) ->
-    {'observationTimeNanoseconds', {Seconds, Fraction}};
+typecast_field(Bin, 325, 8) ->
+    <<Seconds:32, Fraction:32>> = Bin,    {'observationTimeNanoseconds', {Seconds, Fraction}};
 
 typecast_field(Bin, 326, Length)
   when Length =< 8 ->
@@ -1331,8 +1353,8 @@ typecast_field(Bin, 332, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'hashSelectedRangeMax', Value};
 
-typecast_field(<<1>>, 333, 1) ->
-    {'hashDigestOutput', true};
+typecast_field(Bin, 333, 1) ->
+    {'hashDigestOutput', bin2bool(Bin)};
 
 typecast_field(Bin, 334, Length)
   when Length =< 8 ->
@@ -1486,7 +1508,8 @@ typecast_field(Value, 365, 6)
   when byte_size(Value) =:= 6 ->
     {'staMacAddress', Value};
 
-typecast_field(<<A, B, C, D>>, 366, 4) ->
+typecast_field(Bin, 366, 4) ->
+    <<A, B, C, D>> = Bin,
     {'staIPv4Address', {A, B, C, D}};
 
 typecast_field(Value, 367, 6)
@@ -1589,11 +1612,11 @@ typecast_field(Bin, 387, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'rfc3550JitterNanoseconds', Value};
 
-typecast_field(<<1>>, 388, 1) ->
-    {'dot1qDEI', true};
+typecast_field(Bin, 388, 1) ->
+    {'dot1qDEI', bin2bool(Bin)};
 
-typecast_field(<<1>>, 389, 1) ->
-    {'dot1qCustomerDEI', true};
+typecast_field(Bin, 389, 1) ->
+    {'dot1qCustomerDEI', bin2bool(Bin)};
 
 typecast_field(Bin, 390, Length)
   when Length =< 2 ->
@@ -1660,10 +1683,12 @@ typecast_field(Bin, 402, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'transportPacketDeltaCount', Value};
 
-typecast_field(<<A, B, C, D>>, 403, 4) ->
+typecast_field(Bin, 403, 4) ->
+    <<A, B, C, D>> = Bin,
     {'originalExporterIPv4Address', {A, B, C, D}};
 
-typecast_field(<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 404, 16) ->
+typecast_field(Bin, 404, 16) ->
+    <<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>> = Bin,
     {'originalExporterIPv6Address', {A, B, C, D, E, F, G, H}};
 
 typecast_field(Bin, 405, Length)
@@ -1788,7 +1813,8 @@ typecast_field(Bin, 431, Length)
     <<Value:Length/unsigned-integer-unit:8>> = Bin,
     {'layer2FrameTotalCount', Value};
 
-typecast_field(<<A, B, C, D>>, 432, 4) ->
+typecast_field(Bin, 432, 4) ->
+    <<A, B, C, D>> = Bin,
     {'pseudoWireDestinationIPv4Address', {A, B, C, D}};
 
 typecast_field(Bin, 433, Length)
@@ -1813,7 +1839,8 @@ typecast_field(Value, 437, Length)
   when byte_size(Value) == Length ->
     {'mibObjectValueBits', Value};
 
-typecast_field(<<A, B, C, D>>, 438, 4) ->
+typecast_field(Bin, 438, 4) ->
+    <<A, B, C, D>> = Bin,
     {'mibObjectValueIPAddress', {A, B, C, D}};
 
 typecast_field(Bin, 439, Length)
@@ -1915,88 +1942,113 @@ typecast_field(Value, 461, Length)
 
 typecast_field(Value, 462, Length)
   when byte_size(Value) == Length ->
-    {'httpMessageVersion', Value}.
+    {'httpMessageVersion', Value};
+
+typecast_field(Value, Id, _Length) ->
+    {Id, Value}.
 
 
 
 %% ============================
 
-encode_field('octetDeltaCount', Value) ->
+encode_field('octetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 1, 8};
 
-encode_field('packetDeltaCount', Value) ->
+encode_field('packetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 2, 8};
 
-encode_field('deltaFlowCount', Value) ->
+encode_field('deltaFlowCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 3, 8};
 
-encode_field('protocolIdentifier', Value) ->
+encode_field('protocolIdentifier', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 4, 1};
 
-encode_field('ipClassOfService', Value) ->
+encode_field('ipClassOfService', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 5, 1};
 
-encode_field('tcpControlBits', Value) ->
+encode_field('tcpControlBits', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 6, 2};
 
-encode_field('sourceTransportPort', Value) ->
+encode_field('sourceTransportPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 7, 2};
 
 encode_field('sourceIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 8, 4};
 
-encode_field('sourceIPv4PrefixLength', Value) ->
+encode_field('sourceIPv4PrefixLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 9, 1};
 
-encode_field('ingressInterface', Value) ->
+encode_field('ingressInterface', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 10, 4};
 
-encode_field('destinationTransportPort', Value) ->
+encode_field('destinationTransportPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 11, 2};
 
 encode_field('destinationIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 12, 4};
 
-encode_field('destinationIPv4PrefixLength', Value) ->
+encode_field('destinationIPv4PrefixLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 13, 1};
 
-encode_field('egressInterface', Value) ->
+encode_field('egressInterface', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 14, 4};
 
 encode_field('ipNextHopIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 15, 4};
 
-encode_field('bgpSourceAsNumber', Value) ->
+encode_field('bgpSourceAsNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 16, 4};
 
-encode_field('bgpDestinationAsNumber', Value) ->
+encode_field('bgpDestinationAsNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 17, 4};
 
 encode_field('bgpNextHopIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 18, 4};
 
-encode_field('postMCastPacketDeltaCount', Value) ->
+encode_field('postMCastPacketDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 19, 8};
 
-encode_field('postMCastOctetDeltaCount', Value) ->
+encode_field('postMCastOctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 20, 8};
 
-encode_field('flowEndSysUpTime', Value) ->
+encode_field('flowEndSysUpTime', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 21, 4};
 
-encode_field('flowStartSysUpTime', Value) ->
+encode_field('flowStartSysUpTime', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 22, 4};
 
-encode_field('postOctetDeltaCount', Value) ->
+encode_field('postOctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 23, 8};
 
-encode_field('postPacketDeltaCount', Value) ->
+encode_field('postPacketDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 24, 8};
 
-encode_field('minimumIpTotalLength', Value) ->
+encode_field('minimumIpTotalLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 25, 8};
 
-encode_field('maximumIpTotalLength', Value) ->
+encode_field('maximumIpTotalLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 26, 8};
 
 encode_field('sourceIPv6Address', {A, B, C, D, E, F, G, H}) ->
@@ -2005,34 +2057,44 @@ encode_field('sourceIPv6Address', {A, B, C, D, E, F, G, H}) ->
 encode_field('destinationIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 28, 16};
 
-encode_field('sourceIPv6PrefixLength', Value) ->
+encode_field('sourceIPv6PrefixLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 29, 1};
 
-encode_field('destinationIPv6PrefixLength', Value) ->
+encode_field('destinationIPv6PrefixLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 30, 1};
 
-encode_field('flowLabelIPv6', Value) ->
+encode_field('flowLabelIPv6', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 31, 4};
 
-encode_field('icmpTypeCodeIPv4', Value) ->
+encode_field('icmpTypeCodeIPv4', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 32, 2};
 
-encode_field('igmpType', Value) ->
+encode_field('igmpType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 33, 1};
 
-encode_field('flowActiveTimeout', Value) ->
+encode_field('flowActiveTimeout', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 36, 2};
 
-encode_field('flowIdleTimeout', Value) ->
+encode_field('flowIdleTimeout', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 37, 2};
 
-encode_field('exportedOctetTotalCount', Value) ->
+encode_field('exportedOctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 40, 8};
 
-encode_field('exportedMessageTotalCount', Value) ->
+encode_field('exportedMessageTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 41, 8};
 
-encode_field('exportedFlowRecordTotalCount', Value) ->
+encode_field('exportedFlowRecordTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 42, 8};
 
 encode_field('sourceIPv4Prefix', {A, B, C, D}) ->
@@ -2041,22 +2103,27 @@ encode_field('sourceIPv4Prefix', {A, B, C, D}) ->
 encode_field('destinationIPv4Prefix', {A, B, C, D}) ->
     {<<A, B, C, D>>, 45, 4};
 
-encode_field('mplsTopLabelType', Value) ->
+encode_field('mplsTopLabelType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 46, 1};
 
 encode_field('mplsTopLabelIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 47, 4};
 
-encode_field('minimumTTL', Value) ->
+encode_field('minimumTTL', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 52, 1};
 
-encode_field('maximumTTL', Value) ->
+encode_field('maximumTTL', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 53, 1};
 
-encode_field('fragmentIdentification', Value) ->
+encode_field('fragmentIdentification', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 54, 4};
 
-encode_field('postIpClassOfService', Value) ->
+encode_field('postIpClassOfService', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 55, 1};
 
 encode_field('sourceMacAddress', Value)
@@ -2067,16 +2134,20 @@ encode_field('postDestinationMacAddress', Value)
   when is_binary(Value) andalso byte_size(Value) =:= 6 ->
     {Value, 57, 6};
 
-encode_field('vlanId', Value) ->
+encode_field('vlanId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 58, 2};
 
-encode_field('postVlanId', Value) ->
+encode_field('postVlanId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 59, 2};
 
-encode_field('ipVersion', Value) ->
+encode_field('ipVersion', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 60, 1};
 
-encode_field('flowDirection', Value) ->
+encode_field('flowDirection', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 61, 1};
 
 encode_field('ipNextHopIPv6Address', {A, B, C, D, E, F, G, H}) ->
@@ -2085,7 +2156,8 @@ encode_field('ipNextHopIPv6Address', {A, B, C, D, E, F, G, H}) ->
 encode_field('bgpNextHopIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 63, 16};
 
-encode_field('ipv6ExtensionHeaders', Value) ->
+encode_field('ipv6ExtensionHeaders', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 64, 4};
 
 encode_field('mplsTopLabelStackSection', Value)
@@ -2144,29 +2216,36 @@ encode_field('interfaceDescription', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 83, 65535};
 
-encode_field('octetTotalCount', Value) ->
+encode_field('octetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 85, 8};
 
-encode_field('packetTotalCount', Value) ->
+encode_field('packetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 86, 8};
 
-encode_field('fragmentOffset', Value) ->
+encode_field('fragmentOffset', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 88, 2};
 
-encode_field('forwardingStatus', Value) ->
+encode_field('forwardingStatus', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 89, 4};
 
 encode_field('mplsVpnRouteDistinguisher', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 90, 65535};
 
-encode_field('mplsTopLabelPrefixLength', Value) ->
+encode_field('mplsTopLabelPrefixLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 91, 1};
 
-encode_field('srcTrafficIndex', Value) ->
+encode_field('srcTrafficIndex', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 92, 4};
 
-encode_field('dstTrafficIndex', Value) ->
+encode_field('dstTrafficIndex', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 93, 4};
 
 encode_field('applicationDescription', Value)
@@ -2181,19 +2260,24 @@ encode_field('applicationName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 96, 65535};
 
-encode_field('postIpDiffServCodePoint', Value) ->
+encode_field('postIpDiffServCodePoint', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 98, 1};
 
-encode_field('multicastReplicationFactor', Value) ->
+encode_field('multicastReplicationFactor', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 99, 4};
 
-encode_field('classificationEngineId', Value) ->
+encode_field('classificationEngineId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 101, 1};
 
-encode_field('bgpNextAdjacentAsNumber', Value) ->
+encode_field('bgpNextAdjacentAsNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 128, 4};
 
-encode_field('bgpPrevAdjacentAsNumber', Value) ->
+encode_field('bgpPrevAdjacentAsNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 129, 4};
 
 encode_field('exporterIPv4Address', {A, B, C, D}) ->
@@ -2202,116 +2286,151 @@ encode_field('exporterIPv4Address', {A, B, C, D}) ->
 encode_field('exporterIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 131, 16};
 
-encode_field('droppedOctetDeltaCount', Value) ->
+encode_field('droppedOctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 132, 8};
 
-encode_field('droppedPacketDeltaCount', Value) ->
+encode_field('droppedPacketDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 133, 8};
 
-encode_field('droppedOctetTotalCount', Value) ->
+encode_field('droppedOctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 134, 8};
 
-encode_field('droppedPacketTotalCount', Value) ->
+encode_field('droppedPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 135, 8};
 
-encode_field('flowEndReason', Value) ->
+encode_field('flowEndReason', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 136, 1};
 
-encode_field('commonPropertiesId', Value) ->
+encode_field('commonPropertiesId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 137, 8};
 
-encode_field('observationPointId', Value) ->
+encode_field('observationPointId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 138, 8};
 
-encode_field('icmpTypeCodeIPv6', Value) ->
+encode_field('icmpTypeCodeIPv6', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 139, 2};
 
 encode_field('mplsTopLabelIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 140, 16};
 
-encode_field('lineCardId', Value) ->
+encode_field('lineCardId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 141, 4};
 
-encode_field('portId', Value) ->
+encode_field('portId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 142, 4};
 
-encode_field('meteringProcessId', Value) ->
+encode_field('meteringProcessId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 143, 4};
 
-encode_field('exportingProcessId', Value) ->
+encode_field('exportingProcessId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 144, 4};
 
-encode_field('templateId', Value) ->
+encode_field('templateId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 145, 2};
 
-encode_field('wlanChannelId', Value) ->
+encode_field('wlanChannelId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 146, 1};
 
 encode_field('wlanSSID', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 147, 65535};
 
-encode_field('flowId', Value) ->
+encode_field('flowId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 148, 8};
 
-encode_field('observationDomainId', Value) ->
+encode_field('observationDomainId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 149, 4};
 
-encode_field('flowStartSeconds', Value) ->
+encode_field('flowStartSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 150, 4};
 
-encode_field('flowEndSeconds', Value) ->
+encode_field('flowEndSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 151, 4};
 
-encode_field('flowStartMilliseconds', Value) ->
+encode_field('flowStartMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 152, 8};
 
-encode_field('flowEndMilliseconds', Value) ->
+encode_field('flowEndMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 153, 8};
 
-encode_field('flowStartMicroseconds', {Seconds, Fraction}) ->
+encode_field('flowStartMicroseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 154, 8};
 
-encode_field('flowEndMicroseconds', {Seconds, Fraction}) ->
+encode_field('flowEndMicroseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 155, 8};
 
-encode_field('flowStartNanoseconds', {Seconds, Fraction}) ->
+encode_field('flowStartNanoseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 156, 8};
 
-encode_field('flowEndNanoseconds', {Seconds, Fraction}) ->
+encode_field('flowEndNanoseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 157, 8};
 
-encode_field('flowStartDeltaMicroseconds', Value) ->
+encode_field('flowStartDeltaMicroseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 158, 4};
 
-encode_field('flowEndDeltaMicroseconds', Value) ->
+encode_field('flowEndDeltaMicroseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 159, 4};
 
-encode_field('systemInitTimeMilliseconds', Value) ->
+encode_field('systemInitTimeMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 160, 8};
 
-encode_field('flowDurationMilliseconds', Value) ->
+encode_field('flowDurationMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 161, 4};
 
-encode_field('flowDurationMicroseconds', Value) ->
+encode_field('flowDurationMicroseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 162, 4};
 
-encode_field('observedFlowTotalCount', Value) ->
+encode_field('observedFlowTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 163, 8};
 
-encode_field('ignoredPacketTotalCount', Value) ->
+encode_field('ignoredPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 164, 8};
 
-encode_field('ignoredOctetTotalCount', Value) ->
+encode_field('ignoredOctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 165, 8};
 
-encode_field('notSentFlowTotalCount', Value) ->
+encode_field('notSentFlowTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 166, 8};
 
-encode_field('notSentPacketTotalCount', Value) ->
+encode_field('notSentPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 167, 8};
 
-encode_field('notSentOctetTotalCount', Value) ->
+encode_field('notSentOctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 168, 8};
 
 encode_field('destinationIPv6Prefix', {A, B, C, D, E, F, G, H}) ->
@@ -2320,121 +2439,160 @@ encode_field('destinationIPv6Prefix', {A, B, C, D, E, F, G, H}) ->
 encode_field('sourceIPv6Prefix', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 170, 16};
 
-encode_field('postOctetTotalCount', Value) ->
+encode_field('postOctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 171, 8};
 
-encode_field('postPacketTotalCount', Value) ->
+encode_field('postPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 172, 8};
 
-encode_field('flowKeyIndicator', Value) ->
+encode_field('flowKeyIndicator', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 173, 8};
 
-encode_field('postMCastPacketTotalCount', Value) ->
+encode_field('postMCastPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 174, 8};
 
-encode_field('postMCastOctetTotalCount', Value) ->
+encode_field('postMCastOctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 175, 8};
 
-encode_field('icmpTypeIPv4', Value) ->
+encode_field('icmpTypeIPv4', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 176, 1};
 
-encode_field('icmpCodeIPv4', Value) ->
+encode_field('icmpCodeIPv4', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 177, 1};
 
-encode_field('icmpTypeIPv6', Value) ->
+encode_field('icmpTypeIPv6', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 178, 1};
 
-encode_field('icmpCodeIPv6', Value) ->
+encode_field('icmpCodeIPv6', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 179, 1};
 
-encode_field('udpSourcePort', Value) ->
+encode_field('udpSourcePort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 180, 2};
 
-encode_field('udpDestinationPort', Value) ->
+encode_field('udpDestinationPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 181, 2};
 
-encode_field('tcpSourcePort', Value) ->
+encode_field('tcpSourcePort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 182, 2};
 
-encode_field('tcpDestinationPort', Value) ->
+encode_field('tcpDestinationPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 183, 2};
 
-encode_field('tcpSequenceNumber', Value) ->
+encode_field('tcpSequenceNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 184, 4};
 
-encode_field('tcpAcknowledgementNumber', Value) ->
+encode_field('tcpAcknowledgementNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 185, 4};
 
-encode_field('tcpWindowSize', Value) ->
+encode_field('tcpWindowSize', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 186, 2};
 
-encode_field('tcpUrgentPointer', Value) ->
+encode_field('tcpUrgentPointer', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 187, 2};
 
-encode_field('tcpHeaderLength', Value) ->
+encode_field('tcpHeaderLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 188, 1};
 
-encode_field('ipHeaderLength', Value) ->
+encode_field('ipHeaderLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 189, 1};
 
-encode_field('totalLengthIPv4', Value) ->
+encode_field('totalLengthIPv4', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 190, 2};
 
-encode_field('payloadLengthIPv6', Value) ->
+encode_field('payloadLengthIPv6', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 191, 2};
 
-encode_field('ipTTL', Value) ->
+encode_field('ipTTL', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 192, 1};
 
-encode_field('nextHeaderIPv6', Value) ->
+encode_field('nextHeaderIPv6', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 193, 1};
 
-encode_field('mplsPayloadLength', Value) ->
+encode_field('mplsPayloadLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 194, 4};
 
-encode_field('ipDiffServCodePoint', Value) ->
+encode_field('ipDiffServCodePoint', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 195, 1};
 
-encode_field('ipPrecedence', Value) ->
+encode_field('ipPrecedence', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 196, 1};
 
-encode_field('fragmentFlags', Value) ->
+encode_field('fragmentFlags', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 197, 1};
 
-encode_field('octetDeltaSumOfSquares', Value) ->
+encode_field('octetDeltaSumOfSquares', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 198, 8};
 
-encode_field('octetTotalSumOfSquares', Value) ->
+encode_field('octetTotalSumOfSquares', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 199, 8};
 
-encode_field('mplsTopLabelTTL', Value) ->
+encode_field('mplsTopLabelTTL', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 200, 1};
 
-encode_field('mplsLabelStackLength', Value) ->
+encode_field('mplsLabelStackLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 201, 4};
 
-encode_field('mplsLabelStackDepth', Value) ->
+encode_field('mplsLabelStackDepth', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 202, 4};
 
-encode_field('mplsTopLabelExp', Value) ->
+encode_field('mplsTopLabelExp', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 203, 1};
 
-encode_field('ipPayloadLength', Value) ->
+encode_field('ipPayloadLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 204, 4};
 
-encode_field('udpMessageLength', Value) ->
+encode_field('udpMessageLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 205, 2};
 
-encode_field('isMulticast', Value) ->
+encode_field('isMulticast', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 206, 1};
 
-encode_field('ipv4IHL', Value) ->
+encode_field('ipv4IHL', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 207, 1};
 
-encode_field('ipv4Options', Value) ->
+encode_field('ipv4Options', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 208, 4};
 
-encode_field('tcpOptions', Value) ->
+encode_field('tcpOptions', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 209, 8};
 
 encode_field('paddingOctets', Value)
@@ -2447,40 +2605,52 @@ encode_field('collectorIPv4Address', {A, B, C, D}) ->
 encode_field('collectorIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 212, 16};
 
-encode_field('exportInterface', Value) ->
+encode_field('exportInterface', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 213, 4};
 
-encode_field('exportProtocolVersion', Value) ->
+encode_field('exportProtocolVersion', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 214, 1};
 
-encode_field('exportTransportProtocol', Value) ->
+encode_field('exportTransportProtocol', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 215, 1};
 
-encode_field('collectorTransportPort', Value) ->
+encode_field('collectorTransportPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 216, 2};
 
-encode_field('exporterTransportPort', Value) ->
+encode_field('exporterTransportPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 217, 2};
 
-encode_field('tcpSynTotalCount', Value) ->
+encode_field('tcpSynTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 218, 8};
 
-encode_field('tcpFinTotalCount', Value) ->
+encode_field('tcpFinTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 219, 8};
 
-encode_field('tcpRstTotalCount', Value) ->
+encode_field('tcpRstTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 220, 8};
 
-encode_field('tcpPshTotalCount', Value) ->
+encode_field('tcpPshTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 221, 8};
 
-encode_field('tcpAckTotalCount', Value) ->
+encode_field('tcpAckTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 222, 8};
 
-encode_field('tcpUrgTotalCount', Value) ->
+encode_field('tcpUrgTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 223, 8};
 
-encode_field('ipTotalLength', Value) ->
+encode_field('ipTotalLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 224, 8};
 
 encode_field('postNATSourceIPv4Address', {A, B, C, D}) ->
@@ -2489,149 +2659,192 @@ encode_field('postNATSourceIPv4Address', {A, B, C, D}) ->
 encode_field('postNATDestinationIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 226, 4};
 
-encode_field('postNAPTSourceTransportPort', Value) ->
+encode_field('postNAPTSourceTransportPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 227, 2};
 
-encode_field('postNAPTDestinationTransportPort', Value) ->
+encode_field('postNAPTDestinationTransportPort', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 228, 2};
 
-encode_field('natOriginatingAddressRealm', Value) ->
+encode_field('natOriginatingAddressRealm', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 229, 1};
 
-encode_field('natEvent', Value) ->
+encode_field('natEvent', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 230, 1};
 
-encode_field('initiatorOctets', Value) ->
+encode_field('initiatorOctets', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 231, 8};
 
-encode_field('responderOctets', Value) ->
+encode_field('responderOctets', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 232, 8};
 
-encode_field('firewallEvent', Value) ->
+encode_field('firewallEvent', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 233, 1};
 
-encode_field('ingressVRFID', Value) ->
+encode_field('ingressVRFID', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 234, 4};
 
-encode_field('egressVRFID', Value) ->
+encode_field('egressVRFID', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 235, 4};
 
 encode_field('VRFname', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 236, 65535};
 
-encode_field('postMplsTopLabelExp', Value) ->
+encode_field('postMplsTopLabelExp', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 237, 1};
 
-encode_field('tcpWindowScale', Value) ->
+encode_field('tcpWindowScale', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 238, 2};
 
-encode_field('biflowDirection', Value) ->
+encode_field('biflowDirection', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 239, 1};
 
-encode_field('ethernetHeaderLength', Value) ->
+encode_field('ethernetHeaderLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 240, 1};
 
-encode_field('ethernetPayloadLength', Value) ->
+encode_field('ethernetPayloadLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 241, 2};
 
-encode_field('ethernetTotalLength', Value) ->
+encode_field('ethernetTotalLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 242, 2};
 
-encode_field('dot1qVlanId', Value) ->
+encode_field('dot1qVlanId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 243, 2};
 
-encode_field('dot1qPriority', Value) ->
+encode_field('dot1qPriority', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 244, 1};
 
-encode_field('dot1qCustomerVlanId', Value) ->
+encode_field('dot1qCustomerVlanId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 245, 2};
 
-encode_field('dot1qCustomerPriority', Value) ->
+encode_field('dot1qCustomerPriority', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 246, 1};
 
 encode_field('metroEvcId', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 247, 65535};
 
-encode_field('metroEvcType', Value) ->
+encode_field('metroEvcType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 248, 1};
 
-encode_field('pseudoWireId', Value) ->
+encode_field('pseudoWireId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 249, 4};
 
-encode_field('pseudoWireType', Value) ->
+encode_field('pseudoWireType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 250, 2};
 
-encode_field('pseudoWireControlWord', Value) ->
+encode_field('pseudoWireControlWord', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 251, 4};
 
-encode_field('ingressPhysicalInterface', Value) ->
+encode_field('ingressPhysicalInterface', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 252, 4};
 
-encode_field('egressPhysicalInterface', Value) ->
+encode_field('egressPhysicalInterface', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 253, 4};
 
-encode_field('postDot1qVlanId', Value) ->
+encode_field('postDot1qVlanId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 254, 2};
 
-encode_field('postDot1qCustomerVlanId', Value) ->
+encode_field('postDot1qCustomerVlanId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 255, 2};
 
-encode_field('ethernetType', Value) ->
+encode_field('ethernetType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 256, 2};
 
-encode_field('postIpPrecedence', Value) ->
+encode_field('postIpPrecedence', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 257, 1};
 
-encode_field('collectionTimeMilliseconds', Value) ->
+encode_field('collectionTimeMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 258, 8};
 
-encode_field('exportSctpStreamId', Value) ->
+encode_field('exportSctpStreamId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 259, 2};
 
-encode_field('maxExportSeconds', Value) ->
+encode_field('maxExportSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 260, 4};
 
-encode_field('maxFlowEndSeconds', Value) ->
+encode_field('maxFlowEndSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 261, 4};
 
 encode_field('messageMD5Checksum', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 262, 65535};
 
-encode_field('messageScope', Value) ->
+encode_field('messageScope', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 263, 1};
 
-encode_field('minExportSeconds', Value) ->
+encode_field('minExportSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 264, 4};
 
-encode_field('minFlowStartSeconds', Value) ->
+encode_field('minFlowStartSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 265, 4};
 
 encode_field('opaqueOctets', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 266, 65535};
 
-encode_field('sessionScope', Value) ->
+encode_field('sessionScope', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 267, 1};
 
-encode_field('maxFlowEndMicroseconds', {Seconds, Fraction}) ->
+encode_field('maxFlowEndMicroseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 268, 8};
 
-encode_field('maxFlowEndMilliseconds', Value) ->
+encode_field('maxFlowEndMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 269, 8};
 
-encode_field('maxFlowEndNanoseconds', {Seconds, Fraction}) ->
+encode_field('maxFlowEndNanoseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 270, 8};
 
-encode_field('minFlowStartMicroseconds', {Seconds, Fraction}) ->
+encode_field('minFlowStartMicroseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 271, 8};
 
-encode_field('minFlowStartMilliseconds', Value) ->
+encode_field('minFlowStartMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 272, 8};
 
-encode_field('minFlowStartNanoseconds', {Seconds, Fraction}) ->
+encode_field('minFlowStartNanoseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 273, 8};
 
 encode_field('collectorCertificate', Value)
@@ -2642,19 +2855,24 @@ encode_field('exporterCertificate', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 275, 65535};
 
-encode_field('dataRecordsReliability', true) ->
-    {<<1>>, 276, 1};
+encode_field('dataRecordsReliability', Value)
+ when is_boolean(Value) ->
+    {bool2bin(Value), 276, 1};
 
-encode_field('observationPointType', Value) ->
+encode_field('observationPointType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 277, 1};
 
-encode_field('newConnectionDeltaCount', Value) ->
+encode_field('newConnectionDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 278, 4};
 
-encode_field('connectionSumDurationSeconds', Value) ->
+encode_field('connectionSumDurationSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 279, 8};
 
-encode_field('connectionTransactionId', Value) ->
+encode_field('connectionTransactionId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 280, 8};
 
 encode_field('postNATSourceIPv6Address', {A, B, C, D, E, F, G, H}) ->
@@ -2663,20 +2881,24 @@ encode_field('postNATSourceIPv6Address', {A, B, C, D, E, F, G, H}) ->
 encode_field('postNATDestinationIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 282, 16};
 
-encode_field('natPoolId', Value) ->
+encode_field('natPoolId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 283, 4};
 
 encode_field('natPoolName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 284, 65535};
 
-encode_field('anonymizationFlags', Value) ->
+encode_field('anonymizationFlags', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 285, 2};
 
-encode_field('anonymizationTechnique', Value) ->
+encode_field('anonymizationTechnique', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 286, 2};
 
-encode_field('informationElementIndex', Value) ->
+encode_field('informationElementIndex', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 287, 2};
 
 encode_field('p2pTechnology', Value)
@@ -2697,62 +2919,80 @@ encode_field('encryptedTechnology', Value)
 
 %% 293 "subTemplateMultiList" subTemplateMultiList "current";
 
-encode_field('bgpValidityState', Value) ->
+encode_field('bgpValidityState', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 294, 1};
 
-encode_field('IPSecSPI', Value) ->
+encode_field('IPSecSPI', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 295, 4};
 
-encode_field('greKey', Value) ->
+encode_field('greKey', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 296, 4};
 
-encode_field('natType', Value) ->
+encode_field('natType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 297, 1};
 
-encode_field('initiatorPackets', Value) ->
+encode_field('initiatorPackets', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 298, 8};
 
-encode_field('responderPackets', Value) ->
+encode_field('responderPackets', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 299, 8};
 
 encode_field('observationDomainName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 300, 65535};
 
-encode_field('selectionSequenceId', Value) ->
+encode_field('selectionSequenceId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 301, 8};
 
-encode_field('selectorId', Value) ->
+encode_field('selectorId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 302, 8};
 
-encode_field('informationElementId', Value) ->
+encode_field('informationElementId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 303, 2};
 
-encode_field('selectorAlgorithm', Value) ->
+encode_field('selectorAlgorithm', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 304, 2};
 
-encode_field('samplingPacketInterval', Value) ->
+encode_field('samplingPacketInterval', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 305, 4};
 
-encode_field('samplingPacketSpace', Value) ->
+encode_field('samplingPacketSpace', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 306, 4};
 
-encode_field('samplingTimeInterval', Value) ->
+encode_field('samplingTimeInterval', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 307, 4};
 
-encode_field('samplingTimeSpace', Value) ->
+encode_field('samplingTimeSpace', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 308, 4};
 
-encode_field('samplingSize', Value) ->
+encode_field('samplingSize', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 309, 4};
 
-encode_field('samplingPopulation', Value) ->
+encode_field('samplingPopulation', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 310, 4};
 
-encode_field('samplingProbability', Value) ->
+encode_field('samplingProbability', Value)
+  when is_number(Value) ->
     {<<Value:64/float>>, 311, 8};
 
-encode_field('dataLinkFrameSize', Value) ->
+encode_field('dataLinkFrameSize', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 312, 2};
 
 encode_field('ipHeaderPacketSection', Value)
@@ -2775,71 +3015,92 @@ encode_field('mplsPayloadPacketSection', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 317, 65535};
 
-encode_field('selectorIdTotalPktsObserved', Value) ->
+encode_field('selectorIdTotalPktsObserved', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 318, 8};
 
-encode_field('selectorIdTotalPktsSelected', Value) ->
+encode_field('selectorIdTotalPktsSelected', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 319, 8};
 
-encode_field('absoluteError', Value) ->
+encode_field('absoluteError', Value)
+  when is_number(Value) ->
     {<<Value:64/float>>, 320, 8};
 
-encode_field('relativeError', Value) ->
+encode_field('relativeError', Value)
+  when is_number(Value) ->
     {<<Value:64/float>>, 321, 8};
 
-encode_field('observationTimeSeconds', Value) ->
+encode_field('observationTimeSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 322, 4};
 
-encode_field('observationTimeMilliseconds', Value) ->
+encode_field('observationTimeMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 323, 8};
 
-encode_field('observationTimeMicroseconds', {Seconds, Fraction}) ->
+encode_field('observationTimeMicroseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 324, 8};
 
-encode_field('observationTimeNanoseconds', {Seconds, Fraction}) ->
+encode_field('observationTimeNanoseconds', {Seconds, Fraction})
+  when is_integer(Seconds) andalso is_integer(Fraction) ->
     {<<Seconds:32, Fraction:32>>, 325, 8};
 
-encode_field('digestHashValue', Value) ->
+encode_field('digestHashValue', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 326, 8};
 
-encode_field('hashIPPayloadOffset', Value) ->
+encode_field('hashIPPayloadOffset', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 327, 8};
 
-encode_field('hashIPPayloadSize', Value) ->
+encode_field('hashIPPayloadSize', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 328, 8};
 
-encode_field('hashOutputRangeMin', Value) ->
+encode_field('hashOutputRangeMin', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 329, 8};
 
-encode_field('hashOutputRangeMax', Value) ->
+encode_field('hashOutputRangeMax', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 330, 8};
 
-encode_field('hashSelectedRangeMin', Value) ->
+encode_field('hashSelectedRangeMin', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 331, 8};
 
-encode_field('hashSelectedRangeMax', Value) ->
+encode_field('hashSelectedRangeMax', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 332, 8};
 
-encode_field('hashDigestOutput', true) ->
-    {<<1>>, 333, 1};
+encode_field('hashDigestOutput', Value)
+ when is_boolean(Value) ->
+    {bool2bin(Value), 333, 1};
 
-encode_field('hashInitialiserValue', Value) ->
+encode_field('hashInitialiserValue', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 334, 8};
 
 encode_field('selectorName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 335, 65535};
 
-encode_field('upperCILimit', Value) ->
+encode_field('upperCILimit', Value)
+  when is_number(Value) ->
     {<<Value:64/float>>, 336, 8};
 
-encode_field('lowerCILimit', Value) ->
+encode_field('lowerCILimit', Value)
+  when is_number(Value) ->
     {<<Value:64/float>>, 337, 8};
 
-encode_field('confidenceLevel', Value) ->
+encode_field('confidenceLevel', Value)
+  when is_number(Value) ->
     {<<Value:64/float>>, 338, 8};
 
-encode_field('informationElementDataType', Value) ->
+encode_field('informationElementDataType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 339, 1};
 
 encode_field('informationElementDescription', Value)
@@ -2850,19 +3111,24 @@ encode_field('informationElementName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 341, 65535};
 
-encode_field('informationElementRangeBegin', Value) ->
+encode_field('informationElementRangeBegin', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 342, 8};
 
-encode_field('informationElementRangeEnd', Value) ->
+encode_field('informationElementRangeEnd', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 343, 8};
 
-encode_field('informationElementSemantics', Value) ->
+encode_field('informationElementSemantics', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 344, 1};
 
-encode_field('informationElementUnits', Value) ->
+encode_field('informationElementUnits', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 345, 2};
 
-encode_field('privateEnterpriseNumber', Value) ->
+encode_field('privateEnterpriseNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 346, 4};
 
 encode_field('virtualStationInterfaceId', Value)
@@ -2881,46 +3147,60 @@ encode_field('virtualStationName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 350, 65535};
 
-encode_field('layer2SegmentId', Value) ->
+encode_field('layer2SegmentId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 351, 8};
 
-encode_field('layer2OctetDeltaCount', Value) ->
+encode_field('layer2OctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 352, 8};
 
-encode_field('layer2OctetTotalCount', Value) ->
+encode_field('layer2OctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 353, 8};
 
-encode_field('ingressUnicastPacketTotalCount', Value) ->
+encode_field('ingressUnicastPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 354, 8};
 
-encode_field('ingressMulticastPacketTotalCount', Value) ->
+encode_field('ingressMulticastPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 355, 8};
 
-encode_field('ingressBroadcastPacketTotalCount', Value) ->
+encode_field('ingressBroadcastPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 356, 8};
 
-encode_field('egressUnicastPacketTotalCount', Value) ->
+encode_field('egressUnicastPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 357, 8};
 
-encode_field('egressBroadcastPacketTotalCount', Value) ->
+encode_field('egressBroadcastPacketTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 358, 8};
 
-encode_field('monitoringIntervalStartMilliSeconds', Value) ->
+encode_field('monitoringIntervalStartMilliSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 359, 8};
 
-encode_field('monitoringIntervalEndMilliSeconds', Value) ->
+encode_field('monitoringIntervalEndMilliSeconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 360, 8};
 
-encode_field('portRangeStart', Value) ->
+encode_field('portRangeStart', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 361, 2};
 
-encode_field('portRangeEnd', Value) ->
+encode_field('portRangeEnd', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 362, 2};
 
-encode_field('portRangeStepSize', Value) ->
+encode_field('portRangeStepSize', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 363, 2};
 
-encode_field('portRangeNumPorts', Value) ->
+encode_field('portRangeNumPorts', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 364, 2};
 
 encode_field('staMacAddress', Value)
@@ -2934,13 +3214,16 @@ encode_field('wtpMacAddress', Value)
   when is_binary(Value) andalso byte_size(Value) =:= 6 ->
     {Value, 367, 6};
 
-encode_field('ingressInterfaceType', Value) ->
+encode_field('ingressInterfaceType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 368, 4};
 
-encode_field('egressInterfaceType', Value) ->
+encode_field('egressInterfaceType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 369, 4};
 
-encode_field('rtpSequenceNumber', Value) ->
+encode_field('rtpSequenceNumber', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 370, 2};
 
 encode_field('userName', Value)
@@ -2959,88 +3242,116 @@ encode_field('applicationGroupName', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 374, 65535};
 
-encode_field('originalFlowsPresent', Value) ->
+encode_field('originalFlowsPresent', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 375, 8};
 
-encode_field('originalFlowsInitiated', Value) ->
+encode_field('originalFlowsInitiated', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 376, 8};
 
-encode_field('originalFlowsCompleted', Value) ->
+encode_field('originalFlowsCompleted', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 377, 8};
 
-encode_field('distinctCountOfSourceIPAddress', Value) ->
+encode_field('distinctCountOfSourceIPAddress', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 378, 8};
 
-encode_field('distinctCountOfDestinationIPAddress', Value) ->
+encode_field('distinctCountOfDestinationIPAddress', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 379, 8};
 
-encode_field('distinctCountOfSourceIPv4Address', Value) ->
+encode_field('distinctCountOfSourceIPv4Address', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 380, 4};
 
-encode_field('distinctCountOfDestinationIPv4Address', Value) ->
+encode_field('distinctCountOfDestinationIPv4Address', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 381, 4};
 
-encode_field('distinctCountOfSourceIPv6Address', Value) ->
+encode_field('distinctCountOfSourceIPv6Address', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 382, 8};
 
-encode_field('distinctCountOfDestinationIPv6Address', Value) ->
+encode_field('distinctCountOfDestinationIPv6Address', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 383, 8};
 
-encode_field('valueDistributionMethod', Value) ->
+encode_field('valueDistributionMethod', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 384, 1};
 
-encode_field('rfc3550JitterMilliseconds', Value) ->
+encode_field('rfc3550JitterMilliseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 385, 4};
 
-encode_field('rfc3550JitterMicroseconds', Value) ->
+encode_field('rfc3550JitterMicroseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 386, 4};
 
-encode_field('rfc3550JitterNanoseconds', Value) ->
+encode_field('rfc3550JitterNanoseconds', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 387, 4};
 
-encode_field('dot1qDEI', true) ->
-    {<<1>>, 388, 1};
+encode_field('dot1qDEI', Value)
+ when is_boolean(Value) ->
+    {bool2bin(Value), 388, 1};
 
-encode_field('dot1qCustomerDEI', true) ->
-    {<<1>>, 389, 1};
+encode_field('dot1qCustomerDEI', Value)
+ when is_boolean(Value) ->
+    {bool2bin(Value), 389, 1};
 
-encode_field('flowSelectorAlgorithm', Value) ->
+encode_field('flowSelectorAlgorithm', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 390, 2};
 
-encode_field('flowSelectedOctetDeltaCount', Value) ->
+encode_field('flowSelectedOctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 391, 8};
 
-encode_field('flowSelectedPacketDeltaCount', Value) ->
+encode_field('flowSelectedPacketDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 392, 8};
 
-encode_field('flowSelectedFlowDeltaCount', Value) ->
+encode_field('flowSelectedFlowDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 393, 8};
 
-encode_field('selectorIDTotalFlowsObserved', Value) ->
+encode_field('selectorIDTotalFlowsObserved', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 394, 8};
 
-encode_field('selectorIDTotalFlowsSelected', Value) ->
+encode_field('selectorIDTotalFlowsSelected', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 395, 8};
 
-encode_field('samplingFlowInterval', Value) ->
+encode_field('samplingFlowInterval', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 396, 8};
 
-encode_field('samplingFlowSpacing', Value) ->
+encode_field('samplingFlowSpacing', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 397, 8};
 
-encode_field('flowSamplingTimeInterval', Value) ->
+encode_field('flowSamplingTimeInterval', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 398, 8};
 
-encode_field('flowSamplingTimeSpacing', Value) ->
+encode_field('flowSamplingTimeSpacing', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 399, 8};
 
-encode_field('hashFlowDomain', Value) ->
+encode_field('hashFlowDomain', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 400, 2};
 
-encode_field('transportOctetDeltaCount', Value) ->
+encode_field('transportOctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 401, 8};
 
-encode_field('transportPacketDeltaCount', Value) ->
+encode_field('transportPacketDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 402, 8};
 
 encode_field('originalExporterIPv4Address', {A, B, C, D}) ->
@@ -3049,32 +3360,40 @@ encode_field('originalExporterIPv4Address', {A, B, C, D}) ->
 encode_field('originalExporterIPv6Address', {A, B, C, D, E, F, G, H}) ->
     {<<A:16, B:16, C:16, D:16, E:16, F:16, G:16, H:16>>, 404, 16};
 
-encode_field('originalObservationDomainId', Value) ->
+encode_field('originalObservationDomainId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 405, 4};
 
-encode_field('intermediateProcessId', Value) ->
+encode_field('intermediateProcessId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 406, 4};
 
-encode_field('ignoredDataRecordTotalCount', Value) ->
+encode_field('ignoredDataRecordTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 407, 8};
 
-encode_field('dataLinkFrameType', Value) ->
+encode_field('dataLinkFrameType', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 408, 2};
 
-encode_field('sectionOffset', Value) ->
+encode_field('sectionOffset', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 409, 2};
 
-encode_field('sectionExportedOctets', Value) ->
+encode_field('sectionExportedOctets', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 410, 2};
 
 encode_field('dot1qServiceInstanceTag', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 411, 65535};
 
-encode_field('dot1qServiceInstanceId', Value) ->
+encode_field('dot1qServiceInstanceId', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 412, 4};
 
-encode_field('dot1qServiceInstancePriority', Value) ->
+encode_field('dot1qServiceInstancePriority', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 413, 1};
 
 encode_field('dot1qCustomerSourceMacAddress', Value)
@@ -3085,55 +3404,71 @@ encode_field('dot1qCustomerDestinationMacAddress', Value)
   when is_binary(Value) andalso byte_size(Value) =:= 6 ->
     {Value, 415, 6};
 
-encode_field('postLayer2OctetDeltaCount', Value) ->
+encode_field('postLayer2OctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 417, 8};
 
-encode_field('postMCastLayer2OctetDeltaCount', Value) ->
+encode_field('postMCastLayer2OctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 418, 8};
 
-encode_field('postLayer2OctetTotalCount', Value) ->
+encode_field('postLayer2OctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 420, 8};
 
-encode_field('postMCastLayer2OctetTotalCount', Value) ->
+encode_field('postMCastLayer2OctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 421, 8};
 
-encode_field('minimumLayer2TotalLength', Value) ->
+encode_field('minimumLayer2TotalLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 422, 8};
 
-encode_field('maximumLayer2TotalLength', Value) ->
+encode_field('maximumLayer2TotalLength', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 423, 8};
 
-encode_field('droppedLayer2OctetDeltaCount', Value) ->
+encode_field('droppedLayer2OctetDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 424, 8};
 
-encode_field('droppedLayer2OctetTotalCount', Value) ->
+encode_field('droppedLayer2OctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 425, 8};
 
-encode_field('ignoredLayer2OctetTotalCount', Value) ->
+encode_field('ignoredLayer2OctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 426, 8};
 
-encode_field('notSentLayer2OctetTotalCount', Value) ->
+encode_field('notSentLayer2OctetTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 427, 8};
 
-encode_field('layer2OctetDeltaSumOfSquares', Value) ->
+encode_field('layer2OctetDeltaSumOfSquares', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 428, 8};
 
-encode_field('layer2OctetTotalSumOfSquares', Value) ->
+encode_field('layer2OctetTotalSumOfSquares', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 429, 8};
 
-encode_field('layer2FrameDeltaCount', Value) ->
+encode_field('layer2FrameDeltaCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 430, 8};
 
-encode_field('layer2FrameTotalCount', Value) ->
+encode_field('layer2FrameTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 431, 8};
 
 encode_field('pseudoWireDestinationIPv4Address', {A, B, C, D}) ->
     {<<A, B, C, D>>, 432, 4};
 
-encode_field('ignoredLayer2FrameTotalCount', Value) ->
+encode_field('ignoredLayer2FrameTotalCount', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 433, 8};
 
-encode_field('mibObjectValueInteger', Value) ->
+encode_field('mibObjectValueInteger', Value)
+  when is_integer(Value) ->
     {<<Value:64/signed-integer>>, 434, 8};
 
 encode_field('mibObjectValueOctetString', Value)
@@ -3151,16 +3486,20 @@ encode_field('mibObjectValueBits', Value)
 encode_field('mibObjectValueIPAddress', {A, B, C, D}) ->
     {<<A, B, C, D>>, 438, 4};
 
-encode_field('mibObjectValueCounter', Value) ->
+encode_field('mibObjectValueCounter', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 439, 8};
 
-encode_field('mibObjectValueGauge', Value) ->
+encode_field('mibObjectValueGauge', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 440, 4};
 
-encode_field('mibObjectValueTimeTicks', Value) ->
+encode_field('mibObjectValueTimeTicks', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 441, 4};
 
-encode_field('mibObjectValueUnsigned', Value) ->
+encode_field('mibObjectValueUnsigned', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 442, 8};
 
 %% 443 "mibObjectValueTable" subTemplateList "current";
@@ -3171,13 +3510,16 @@ encode_field('mibObjectIdentifier', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 445, 65535};
 
-encode_field('mibSubIdentifier', Value) ->
+encode_field('mibSubIdentifier', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:32/unsigned-integer>>, 446, 4};
 
-encode_field('mibIndexIndicator', Value) ->
+encode_field('mibIndexIndicator', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:64/unsigned-integer>>, 447, 8};
 
-encode_field('mibCaptureTimeSemantics', Value) ->
+encode_field('mibCaptureTimeSemantics', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:8/unsigned-integer>>, 448, 1};
 
 encode_field('mibContextEngineID', Value)
@@ -3212,10 +3554,12 @@ encode_field('mobileMSISDN', Value)
   when is_binary(Value) ->
     {encode_variable_field(Value), 456, 65535};
 
-encode_field('httpStatusCode', Value) ->
+encode_field('httpStatusCode', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 457, 2};
 
-encode_field('sourceTransportPortsLimit', Value) ->
+encode_field('sourceTransportPortsLimit', Value)
+  when is_integer(Value) andalso Value >= 0 ->
     {<<Value:16/unsigned-integer>>, 458, 2};
 
 encode_field('httpRequestMethod', Value)
@@ -3232,5 +3576,12 @@ encode_field('httpRequestTarget', Value)
 
 encode_field('httpMessageVersion', Value)
   when is_binary(Value) ->
-    {encode_variable_field(Value), 462, 65535}.
+    {encode_variable_field(Value), 462, 65535};
+
+encode_field(Id, Value)
+  when is_integer(Id) andalso is_binary(Value) ->
+    {Value, Id, byte_size(Value)};
+
+encode_field(Id, Value) ->
+    erlang:error(badarg, [Id, Value]).
 

@@ -1,5 +1,9 @@
 -module(ipfix_v10_codec).
 
+-compile(inline).
+-compile(inline_list_funcs).
+-compile(bin_opt_info).
+
 %% API
 -export([init/0]).
 -export([decode/2]).
@@ -9,6 +13,10 @@
 
 -define(TEMPLATES_TABLE, ipfix_v10_templates).
 -define(TEMPLATES_TABLE_OPTS, [named_table, public, {read_concurrency, true}]).
+
+%%%===================================================================
+%%% API
+%%%===================================================================
 
 %% @doc Creates the ETS table for storing templates.
 -spec init() -> ok.
@@ -49,7 +57,10 @@ encode(ExportTime, FlowSeq, DomainId, TemplateId, Records) ->
     Header = <<10:16, (Length + 16):16, ExportTime:32, FlowSeq:32, DomainId:32>>,
     list_to_binary([Header, Template, DataFlowset]).
 
-%% Internal functions
+%%%===================================================================
+%%% Internal functions
+%%%===================================================================
+
 encode_fields(Fields) ->
     Encoded = [Data || {Data, _, _} <- [encode_field(F, V) || {F, V} <- Fields]],
     list_to_binary(Encoded).
@@ -194,6 +205,11 @@ encode_variable_field(Value)
     <<(byte_size(Value)):8, Value/binary>>;
 encode_variable_field(Value) ->
     <<255, (byte_size(Value)):16, Value/binary>>.
+
+bin2bool(<<1>>) -> true;
+bin2bool(<<2>>) -> false.
+bool2bin(true)  -> <<1>>;
+bool2bin(false) -> <<2>>.
 
 -include("ipfix_v10_codec_gen.hrl").
 
